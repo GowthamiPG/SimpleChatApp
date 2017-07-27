@@ -8,6 +8,7 @@ import com.trautmann.simplechatapp.R;
 
 /**
  * Created by Brandon Trautmann
+ * Activity for the user to view their messages list
  */
 
 public class MainActivity extends AppCompatActivity {
