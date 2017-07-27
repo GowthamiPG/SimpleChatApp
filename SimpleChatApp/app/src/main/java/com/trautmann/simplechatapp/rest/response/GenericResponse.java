@@ -24,6 +24,10 @@ public class GenericResponse {
         this.message = message;
     }
 
+    public boolean isErrorFree() {
+        return errors == null || errors.size() == 0;
+    }
+
     private class Error {
 
         public Error(String name) {
