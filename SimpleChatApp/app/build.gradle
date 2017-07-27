@@ -3,6 +3,9 @@ apply plugin: 'com.android.application'
 android {
     compileSdkVersion 26
     buildToolsVersion "25.0.0"
+    dataBinding {
+        enabled = true
+    }
     defaultConfig {
         applicationId "com.trautmann.simplechatapp"
         minSdkVersion 19
