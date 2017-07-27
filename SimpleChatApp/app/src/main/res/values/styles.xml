@@ -8,4 +8,14 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+
+    <style name="DefaultPadding" parent="AppTheme">
+        <item name="android:paddingStart">@dimen/horizontal_spacing</item>
+        <item name="android:paddingEnd">@dimen/horizontal_spacing</item>
+        <item name="android:paddingLeft">@dimen/horizontal_spacing</item>
+        <item name="android:paddingRight">@dimen/horizontal_spacing</item>
+        <item name="android:paddingTop">@dimen/vertical_spacing</item>
+        <item name="android:paddingBottom">@dimen/vertical_spacing</item>
+    </style>
+
 </resources>
