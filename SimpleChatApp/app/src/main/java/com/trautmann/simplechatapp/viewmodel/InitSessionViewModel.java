@@ -1,11 +1,13 @@
 package com.trautmann.simplechatapp.viewmodel;
 
 import android.content.Context;
-import android.content.Intent;
-import android.util.Log;
-import android.view.View;
+import android.text.TextUtils;
+import android.widget.EditText;
 
-import com.trautmann.simplechatapp.view.MainActivity;
+import com.trautmann.simplechatapp.rest.RestActions;
+import com.trautmann.simplechatapp.rest.response.GenericResponse;
+
+import io.reactivex.Single;
 
 /**
  * Created by Brandon Trautmann
@@ -19,20 +21,13 @@ public class InitSessionViewModel {
         this.context = context;
     }
 
-    public View.OnClickListener onClickLogin(){
-        return new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Log.d("InitSessionViewModel", "Click!");
-                logUserIn();
-            }
-        };
+    public boolean areValidLoginInputs(EditText loginInput, EditText passwordInput) {
+        return !TextUtils.isEmpty(loginInput.getEditableText().toString())
+                && !TextUtils.isEmpty(passwordInput.getEditableText().toString());
     }
 
-    public void logUserIn() {
-        //TODO: Actually log the user in
-        Intent intent = new Intent(context, MainActivity.class);
-        context.startActivity(intent);
+    public Single<GenericResponse> logUserIn(String login, String password) {
+        return RestActions.login(login, password);
     }
 
     public void registerUser() {

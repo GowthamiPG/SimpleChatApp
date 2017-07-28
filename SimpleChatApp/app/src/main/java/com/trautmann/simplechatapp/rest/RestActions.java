@@ -1,8 +1,10 @@
 package com.trautmann.simplechatapp.rest;
 
 import com.trautmann.simplechatapp.rest.response.CreateChatMessage;
+import com.trautmann.simplechatapp.rest.response.GenericResponse;
 import com.trautmann.simplechatapp.rest.response.GetChatMessagesList;
 import com.trautmann.simplechatapp.rest.response.GetChatsList;
+import com.trautmann.simplechatapp.rest.service.AuthService;
 import com.trautmann.simplechatapp.rest.service.ChatsService;
 
 import io.reactivex.Single;
@@ -13,6 +15,16 @@ import io.reactivex.Single;
 
 public class RestActions {
 
+    // Auth
+    public static Single<GenericResponse> login(String email, String password) {
+        RestAction<GenericResponse> action = new RestAction<>(
+                ServiceCreator.createService(AuthService.class).login(email, password));
+        return action.perform();
+    }
+
+
+
+    // Chats
     public static Single<GetChatsList> getChatsList() {
         RestAction<GetChatsList> action = new RestAction<>(
                 ServiceCreator.createService(ChatsService.class).getChatsList());
