@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.trautmann.simplechatapp.viewmodel.ChatListItemViewModel" />
+    </data>
+
+    <android.support.v7.widget.CardView
+        android:onClick="@{viewModel.onChatClicked()}"
+        android:id="@+id/chatContainer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            style="@style/DefaultPadding"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/chatNameTextView"
+                style="@style/ChatNameTextView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@{viewModel.chatName}"
+                tools:text="@string/chat_name_field" />
+
+            <TextView
+                android:id="@+id/chatLastMessageTextView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@{viewModel.lastChatMessage}"
+                tools:text="@string/chat_last_message_field" />
+
+        </LinearLayout>
+
+    </android.support.v7.widget.CardView>
+</layout>

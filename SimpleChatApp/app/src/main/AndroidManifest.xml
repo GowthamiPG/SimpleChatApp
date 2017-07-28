@@ -20,6 +20,9 @@
 
         <activity android:name=".view.MainActivity"/>
 
+        <activity android:name=".view.ChatDetailActivity"
+            android:parentActivityName=".view.MainActivity"/>
+
     </application>
 
 </manifest>

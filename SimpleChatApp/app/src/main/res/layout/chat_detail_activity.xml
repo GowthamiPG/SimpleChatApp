@@ -1,25 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
-
 <layout xmlns:android="http://schemas.android.com/apk/res/android">
 
     <data>
 
         <variable
             name="viewModel"
-            type="com.trautmann.simplechatapp.viewmodel.MainActivityViewModel" />
+            type="com.trautmann.simplechatapp.viewmodel.InitSessionViewModel" />
     </data>
 
     <LinearLayout
-        style="@style/DefaultPadding"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/chatListRecyclerView"
+        <TextView
+            android:text="Hello world"
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
 
     </LinearLayout>
-
 </layout>
