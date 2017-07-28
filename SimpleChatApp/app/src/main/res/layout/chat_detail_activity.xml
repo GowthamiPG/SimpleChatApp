@@ -6,7 +6,6 @@
     <data>
 
         <variable name="viewModel" type="com.trautmann.simplechatapp.viewmodel.ChatDetailActivityViewModel" />
-        <variable name="newMessageInput" type="android.widget.EditText" />
     </data>
 
     <android.support.constraint.ConstraintLayout
@@ -74,7 +73,6 @@
                 android:inputType="textCapSentences" />
 
             <ImageButton
-                android:onClick="@{viewModel.sendMessage(chatDetailInputEditText)}"
                 android:id="@+id/chatDetailSendImageButton"
                 style="@style/SmallMargin"
                 android:layout_width="wrap_content"
