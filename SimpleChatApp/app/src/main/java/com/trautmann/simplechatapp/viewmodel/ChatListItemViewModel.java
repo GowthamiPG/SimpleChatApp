@@ -6,6 +6,7 @@ import android.view.View;
 
 import com.trautmann.simplechatapp.R;
 import com.trautmann.simplechatapp.rest.model.Chat;
+import com.trautmann.simplechatapp.util.Constants;
 import com.trautmann.simplechatapp.view.ChatDetailActivity;
 
 /**
@@ -35,6 +36,8 @@ public class ChatListItemViewModel {
     public View.OnClickListener onChatClicked() {
         return view -> {
             Intent intent = new Intent(context, ChatDetailActivity.class);
+            intent.putExtra(Constants.IntentArguments.CHAT_ID, chat.getId());
+            intent.putExtra(Constants.IntentArguments.CHAT_NAME, chat.getName());
             context.startActivity(intent);
         };
     }
