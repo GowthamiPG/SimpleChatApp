@@ -22,6 +22,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/vertical_spacing"
             android:gravity="center_horizontal"
+            android:text="@{viewModel.userName}"
             tools:text="@string/profile_name_field" />
 
         <TextView
@@ -30,6 +31,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/vertical_spacing"
             android:gravity="center_horizontal"
+            android:text="@{viewModel.userEmail}"
             tools:text="@string/profile_email_field" />
 
         <Button
