@@ -6,6 +6,7 @@ import io.reactivex.Single;
 import retrofit2.Response;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
+import retrofit2.http.GET;
 import retrofit2.http.POST;
 
 /**
@@ -18,5 +19,8 @@ public interface AuthService {
     @FormUrlEncoded
     Single<Response<GenericResponse>> login(@Field("email") String email,
                                             @Field("password") String password);
+
+    @GET("auth/logout")
+    Single<Response<GenericResponse>> logout();
 
 }

@@ -5,6 +5,7 @@
 
     <data>
 
+        <import type="android.view.View"/>
         <variable
             name="viewModel"
             type="com.trautmann.simplechatapp.viewmodel.ProfileActivityViewModel" />
@@ -34,13 +35,31 @@
             android:text="@{viewModel.userEmail}"
             tools:text="@string/profile_email_field" />
 
-        <Button
-            android:id="@+id/profileLogOutButton"
+        <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/vertical_spacing"
-            android:background="@drawable/background_large_button"
-            android:text="@string/profile_log_out_button_text" />
+            android:layout_marginTop="@dimen/vertical_spacing">
+
+            <ProgressBar
+                android:visibility="@{viewModel.loggingOut ? View.VISIBLE : View.GONE}"
+                android:id="@+id/logOutProgressBar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true" />
+
+            <Button
+                android:id="@+id/profileLogOutButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:background="@drawable/background_large_button"
+                android:onClick="@{viewModel.onLogOutClicked()}"
+                android:text="@string/profile_log_out_button_text"
+                android:visibility="@{viewModel.loggingOut ? View.GONE : View.VISIBLE}" />
+
+
+        </RelativeLayout>
+
 
     </LinearLayout>
 

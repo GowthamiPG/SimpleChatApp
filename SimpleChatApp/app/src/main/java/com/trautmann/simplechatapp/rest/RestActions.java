@@ -24,6 +24,12 @@ public class RestActions {
         return action.perform();
     }
 
+    public static Single<GenericResponse> logout() {
+        RestAction<GenericResponse> action = new RestAction<>(
+                ServiceCreator.createService(AuthService.class).logout());
+        return action.perform();
+    }
+
     // User
     public static Single<GetCurrentUser> getCurrentUser() {
         RestAction<GetCurrentUser> action = new RestAction<>(
