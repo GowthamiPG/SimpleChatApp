@@ -4,8 +4,10 @@ import com.trautmann.simplechatapp.rest.response.CreateChatMessage;
 import com.trautmann.simplechatapp.rest.response.GenericResponse;
 import com.trautmann.simplechatapp.rest.response.GetChatMessagesList;
 import com.trautmann.simplechatapp.rest.response.GetChatsList;
+import com.trautmann.simplechatapp.rest.response.GetCurrentUser;
 import com.trautmann.simplechatapp.rest.service.AuthService;
 import com.trautmann.simplechatapp.rest.service.ChatsService;
+import com.trautmann.simplechatapp.rest.service.UserService;
 
 import io.reactivex.Single;
 
@@ -22,7 +24,12 @@ public class RestActions {
         return action.perform();
     }
 
-
+    // User
+    public static Single<GetCurrentUser> getCurrentUser() {
+        RestAction<GetCurrentUser> action = new RestAction<>(
+                ServiceCreator.createService(UserService.class).getCurrentUser());
+        return action.perform();
+    }
 
     // Chats
     public static Single<GetChatsList> getChatsList() {
