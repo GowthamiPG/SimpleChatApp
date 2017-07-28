@@ -32,6 +32,7 @@ public class ServiceCreator {
     }
 
     private static String getBaseUrl() {
+//        return "https://private-93240c-oracodechallenge.apiary-mock.com/";
         return "https://private-anon-47ba9efa30-oracodechallenge.apiary-mock.com/";
     }
 }
