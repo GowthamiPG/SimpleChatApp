@@ -18,10 +18,10 @@
 
         <TextView
             android:id="@+id/chatMessageSenderTextView"
-            style="@style/ChatNameTextView"
+            style="@style/ChatMessageSenderNameTextView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@{viewModel.chatName}"
+            android:text="@{viewModel.senderName}"
             tools:text="@string/chat_name_field" />
 
         <TextView

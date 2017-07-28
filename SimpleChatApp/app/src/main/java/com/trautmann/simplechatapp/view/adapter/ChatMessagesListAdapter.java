@@ -27,11 +27,11 @@ public class ChatMessagesListAdapter extends RecyclerView.Adapter<ChatMessagesLi
         this.context = context;
     }
 
-    public List<ChatMessage> getChats() {
+    public List<ChatMessage> getChatMessages() {
         return chatMessages;
     }
 
-    public void setChats(List<ChatMessage> chats) {
+    public void setChatMessages(List<ChatMessage> chats) {
         this.chatMessages = chats;
     }
 
@@ -39,7 +39,7 @@ public class ChatMessagesListAdapter extends RecyclerView.Adapter<ChatMessagesLi
     public ChatMessageBindingHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         ChatMessageListItemBinding chatMessageListItemBinding = DataBindingUtil.inflate(
                 LayoutInflater.from(parent.getContext()),
-                R.layout.chat_list_item,
+                R.layout.chat_message_list_item,
                 parent,
                 false);
         return new ChatMessageBindingHolder(chatMessageListItemBinding);
