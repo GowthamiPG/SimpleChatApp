@@ -13,6 +13,7 @@ import android.widget.Toast;
 import com.trautmann.simplechatapp.R;
 import com.trautmann.simplechatapp.databinding.MainActivityBinding;
 import com.trautmann.simplechatapp.view.adapter.ChatsListAdapter;
+import com.trautmann.simplechatapp.view.dialog.CreateChatDialog;
 import com.trautmann.simplechatapp.viewmodel.MainActivityViewModel;
 
 /**
@@ -20,7 +21,7 @@ import com.trautmann.simplechatapp.viewmodel.MainActivityViewModel;
  * Activity for the user to view their messages list
  */
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements CreateChatDialog.ICreateChat {
 
     private MainActivityBinding binding;
     private ChatsListAdapter adapter;
@@ -70,4 +71,8 @@ public class MainActivity extends AppCompatActivity {
                         "Error loading chats", Toast.LENGTH_SHORT).show());
     }
 
+    @Override
+    public void onCreateClicked(String name, String message) {
+
+    }
 }
