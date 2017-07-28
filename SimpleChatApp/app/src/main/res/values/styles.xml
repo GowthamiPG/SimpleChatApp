@@ -59,11 +59,7 @@
 
     <style name="TextInputMargin" parent="SmallMargin">
         <item name="android:layout_marginStart">@dimen/horizontal_spacing</item>
-        <item name="android:layout_marginEnd">@dimen/small_spacing</item>
         <item name="android:layout_marginLeft">@dimen/horizontal_spacing</item>
-        <item name="android:layout_marginRight">@dimen/small_spacing</item>
-        <item name="android:layout_marginTop">@dimen/small_spacing</item>
-        <item name="android:layout_marginBottom">@dimen/small_spacing</item>
     </style>
 
     <style name="ChatNameTextView" parent="AppTheme">
