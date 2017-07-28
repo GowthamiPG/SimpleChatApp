@@ -2,10 +2,11 @@
     <string name="app_name">SimpleChatApp</string>
 
 
-    <!-- Login -->
+    <!-- Auth -->
     <string name="username_hint_text">Username</string>
     <string name="password_hint_text">Password</string>
     <string name="login_button_text">Log In</string>
+    <string name="account_menu_action_title">Account</string>
 
     <!-- Chat -->
     <string name="chat_last_message">%1$s: %2$s</string>
