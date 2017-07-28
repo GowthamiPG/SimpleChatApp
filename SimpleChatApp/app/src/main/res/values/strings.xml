@@ -6,7 +6,10 @@
     <string name="username_hint_text">Username</string>
     <string name="password_hint_text">Password</string>
     <string name="login_button_text">Log In</string>
-    <string name="account_menu_action_title">Account</string>
+
+    <!-- Profile -->
+    <string name="profile_menu_action_title">Profile</string>
+    <string name="profile_log_out_button_text">Log out</string>
 
     <!-- Chat -->
     <string name="chat_last_message">%1$s: %2$s</string>
@@ -15,6 +18,10 @@
     <!-- Tools (placeholders, dev use only) -->
     <string name="chat_name_field">Chat Name</string>
     <string name="chat_last_message_field">Chat Last Message</string>
+    <string name="profile_name_field">Name</string>
+    <string name="profile_email_field">Email Address</string>
+
+
 
 
 

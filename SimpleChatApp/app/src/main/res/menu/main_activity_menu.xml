@@ -4,7 +4,7 @@
 
     <item
         android:icon="@drawable/ic_account_circle_white_24dp"
-        android:title="@string/account_menu_action_title"
+        android:title="@string/profile_menu_action_title"
         app:showAsAction="always"/>
 
 
