@@ -11,7 +11,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
  * Created by Brandon Trautmann
  */
 
-public class ServiceFactory {
+public class ServiceCreator {
 
     private static Gson gson = new GsonBuilder().create();
     private static Retrofit.Builder builder = getBuilder();

@@ -10,17 +10,17 @@ import io.reactivex.Single;
  * Created by Brandon Trautmann
  */
 
-public class RestActionFactory {
+public class RestActions {
 
     public static Single<GetChatsList> getChatsList() {
         RestAction<GetChatsList> action = new RestAction<>(
-                ServiceFactory.createService(ChatsService.class).getChatsList());
+                ServiceCreator.createService(ChatsService.class).getChatsList());
         return action.perform();
     }
 
     public static Single<GetChatMessagesList> getChatMessagesList(int chatId) {
         RestAction<GetChatMessagesList> action = new RestAction<>(
-                ServiceFactory.createService(ChatsService.class).getChatMessagesList(chatId));
+                ServiceCreator.createService(ChatsService.class).getChatMessagesList(chatId));
         return action.perform();
     }
 }

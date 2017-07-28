@@ -36,6 +36,7 @@ public class ChatDetailActivity extends AppCompatActivity {
         String chatName = getIntent().getExtras().getString(Constants.IntentArguments.CHAT_NAME);
         binding.setViewModel(new ChatDetailActivityViewModel(this,
                 new Chat(chatId, chatName, null, null)));
+        binding.setNewMessageInput(binding.chatDetailInputEditText);
 
         setSupportActionBar(binding.chatDetailToolbar);
         if (getSupportActionBar() != null) {
@@ -62,4 +63,6 @@ public class ChatDetailActivity extends AppCompatActivity {
                 }, throwable -> Toast.makeText(ChatDetailActivity.this, "Error getting" +
                         " messages!", Toast.LENGTH_SHORT).show());
     }
+
+
 }

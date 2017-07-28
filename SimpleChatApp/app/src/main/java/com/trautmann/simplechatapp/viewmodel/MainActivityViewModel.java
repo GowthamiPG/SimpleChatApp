@@ -1,6 +1,6 @@
 package com.trautmann.simplechatapp.viewmodel;
 
-import com.trautmann.simplechatapp.rest.RestActionFactory;
+import com.trautmann.simplechatapp.rest.RestActions;
 import com.trautmann.simplechatapp.rest.response.GetChatsList;
 
 import io.reactivex.Single;
@@ -15,6 +15,6 @@ public class MainActivityViewModel {
     }
 
     public Single<GetChatsList> getChatList() {
-        return RestActionFactory.getChatsList();
+        return RestActions.getChatsList();
     }
 }

@@ -1,8 +1,11 @@
 package com.trautmann.simplechatapp.viewmodel;
 
 import android.content.Context;
+import android.util.Log;
+import android.view.View;
+import android.widget.EditText;
 
-import com.trautmann.simplechatapp.rest.RestActionFactory;
+import com.trautmann.simplechatapp.rest.RestActions;
 import com.trautmann.simplechatapp.rest.model.Chat;
 import com.trautmann.simplechatapp.rest.response.GetChatMessagesList;
 
@@ -35,7 +38,16 @@ public class ChatDetailActivityViewModel {
     }
 
     public Single<GetChatMessagesList> getChatMessagesList(int chatId) {
-        return RestActionFactory.getChatMessagesList(chatId);
+        return RestActions.getChatMessagesList(chatId);
+    }
+
+    public View.OnClickListener sendMessage(EditText textInput) {
+        return new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Log.d("LOG", "Send: " + textInput.getEditableText().toString());
+            }
+        };
     }
 
 }
