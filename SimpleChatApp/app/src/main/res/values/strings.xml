@@ -1,5 +1,7 @@
 <resources>
+    <!-- Title -->
     <string name="app_name">SimpleChatApp</string>
+    <string name="profile_title">Profile</string>
 
 
     <!-- Auth -->
