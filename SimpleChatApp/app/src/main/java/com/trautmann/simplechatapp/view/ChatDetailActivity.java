@@ -21,7 +21,8 @@ public class ChatDetailActivity extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        ChatDetailActivityBinding binding = DataBindingUtil.setContentView(this, R.layout.chat_detail_activity);
+        ChatDetailActivityBinding binding =
+                DataBindingUtil.setContentView(this, R.layout.chat_detail_activity);
         int id = getIntent().getExtras().getInt(Constants.IntentArguments.CHAT_ID);
         String name = getIntent().getExtras().getString(Constants.IntentArguments.CHAT_NAME);
         binding.setViewModel(new ChatDetailActivityViewModel(this,
