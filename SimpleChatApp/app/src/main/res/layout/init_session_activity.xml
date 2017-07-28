@@ -1,8 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android">
+
     <data>
-        <variable name="viewModel" type="com.trautmann.simplechatapp.viewmodel.InitSessionViewModel"/>
+        <variable
+            name="viewModel"
+            type="com.trautmann.simplechatapp.viewmodel.InitSessionViewModel" />
     </data>
+
     <LinearLayout
         style="@style/DefaultPadding"
         android:layout_width="match_parent"
@@ -25,10 +29,10 @@
             android:inputType="textPassword" />
 
         <Button
-            android:onClick="@{viewModel.onClickLogin()}"
             android:id="@+id/loginButton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:onClick="@{viewModel.onClickLogin()}"
             android:text="@string/login_button_text" />
 
 
