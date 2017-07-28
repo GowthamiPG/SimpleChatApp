@@ -38,6 +38,34 @@
         <item name="android:paddingBottom">@dimen/vertical_spacing</item>
     </style>
 
+
+    <style name="DefaultMargin" parent="AppTheme">
+        <item name="android:layout_marginStart">@dimen/horizontal_spacing</item>
+        <item name="android:layout_marginEnd">@dimen/horizontal_spacing</item>
+        <item name="android:layout_marginLeft">@dimen/horizontal_spacing</item>
+        <item name="android:layout_marginRight">@dimen/horizontal_spacing</item>
+        <item name="android:layout_marginTop">@dimen/vertical_spacing</item>
+        <item name="android:layout_marginBottom">@dimen/vertical_spacing</item>
+    </style>
+
+    <style name="SmallMargin" parent="AppTheme">
+        <item name="android:layout_marginStart">@dimen/small_spacing</item>
+        <item name="android:layout_marginEnd">@dimen/small_spacing</item>
+        <item name="android:layout_marginLeft">@dimen/small_spacing</item>
+        <item name="android:layout_marginRight">@dimen/small_spacing</item>
+        <item name="android:layout_marginTop">@dimen/small_spacing</item>
+        <item name="android:layout_marginBottom">@dimen/small_spacing</item>
+    </style>
+
+    <style name="TextInputMargin" parent="SmallMargin">
+        <item name="android:layout_marginStart">@dimen/horizontal_spacing</item>
+        <item name="android:layout_marginEnd">@dimen/small_spacing</item>
+        <item name="android:layout_marginLeft">@dimen/horizontal_spacing</item>
+        <item name="android:layout_marginRight">@dimen/small_spacing</item>
+        <item name="android:layout_marginTop">@dimen/small_spacing</item>
+        <item name="android:layout_marginBottom">@dimen/small_spacing</item>
+    </style>
+
     <style name="ChatNameTextView" parent="AppTheme">
         <item name="android:textStyle">bold</item>
         <item name="android:textSize">16sp</item>

@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <data>
 
@@ -9,30 +10,82 @@
             type="com.trautmann.simplechatapp.viewmodel.ChatDetailActivityViewModel" />
     </data>
 
-    <LinearLayout
+    <android.support.constraint.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
 
         <android.support.design.widget.AppBarLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:id="@+id/chatDetailAppBarLayout"
+            android:layout_width="0dp"
+            android:layout_height="?attr/actionBarSize"
+            app:layout_constraintBottom_toTopOf="@+id/chatMessagesListRecyclerView"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:layout_editor_absoluteX="8dp">
 
             <android.support.v7.widget.Toolbar
                 android:id="@+id/chatDetailToolbar"
-                app:theme="@style/Toolbar"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:minHeight="?attr/actionBarSize"
                 android:title="@{viewModel.title}"
-                android:minHeight="?attr/actionBarSize">
+                app:theme="@style/Toolbar">
 
             </android.support.v7.widget.Toolbar>
         </android.support.design.widget.AppBarLayout>
 
         <android.support.v7.widget.RecyclerView
+            android:paddingBottom="@dimen/vertical_spacing"
+            android:paddingTop="@dimen/vertical_spacing"
+            android:overScrollMode="never"
             android:id="@+id/chatMessagesListRecyclerView"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"/>
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:clipToPadding="false"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintBottom_toTopOf="@+id/chatDetailInputLayout"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/chatDetailAppBarLayout" />
 
-    </LinearLayout>
+        <RelativeLayout
+            android:id="@+id/chatDetailInputLayout"
+            style="@style/DefaultMargin"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:background="@drawable/background_text_input"
+            android:orientation="horizontal"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            tools:layout_editor_absoluteX="8dp">
+
+            <EditText
+                android:id="@+id/chatDetailInputEditText"
+                style="@style/TextInputMargin"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_centerVertical="true"
+                android:layout_toStartOf="@+id/chatDetailSendImageButton"
+                android:background="@android:color/transparent"
+                android:hint="@string/new_message_hint_text"
+                android:inputType="textCapSentences" />
+
+            <ImageButton
+                android:id="@+id/chatDetailSendImageButton"
+                style="@style/SmallMargin"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:background="@android:color/transparent"
+                android:src="@drawable/ic_send_black_24dp" />
+
+
+        </RelativeLayout>
+
+    </android.support.constraint.ConstraintLayout>
 </layout>
