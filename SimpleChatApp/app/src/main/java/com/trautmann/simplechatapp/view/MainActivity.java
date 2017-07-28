@@ -43,8 +43,6 @@ public class MainActivity extends AppCompatActivity {
         binding.getViewModel().getChatList()
                 .subscribe(getChatsList -> {
                     if (getChatsList.getChats() != null) {
-                        Toast.makeText(MainActivity.this,
-                                "Chats found: " + getChatsList.getChats().size(), Toast.LENGTH_SHORT).show();
                         adapter.setChats(getChatsList.getChats());
                         adapter.notifyDataSetChanged();
                     }
