@@ -37,12 +37,12 @@ public class ChatsListAdapter extends RecyclerView.Adapter<ChatsListAdapter.Chat
 
     @Override
     public ChatBindingHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        ChatListItemBinding postBinding = DataBindingUtil.inflate(
+        ChatListItemBinding chatListItemBinding = DataBindingUtil.inflate(
                 LayoutInflater.from(parent.getContext()),
                 R.layout.chat_list_item,
                 parent,
                 false);
-        return new ChatBindingHolder(postBinding);
+        return new ChatBindingHolder(chatListItemBinding);
     }
 
     @Override
