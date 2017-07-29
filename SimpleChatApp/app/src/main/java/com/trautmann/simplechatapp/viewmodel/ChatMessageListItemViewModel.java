@@ -1,7 +1,5 @@
 package com.trautmann.simplechatapp.viewmodel;
 
-import android.content.Context;
-
 import com.trautmann.simplechatapp.model.ChatMessage;
 
 /**

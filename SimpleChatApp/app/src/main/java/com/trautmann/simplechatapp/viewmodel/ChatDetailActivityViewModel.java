@@ -1,17 +1,14 @@
 package com.trautmann.simplechatapp.viewmodel;
 
-import android.content.Context;
 import android.databinding.BaseObservable;
 import android.databinding.Bindable;
-import android.databinding.ObservableArrayList;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.EditText;
 
 import com.android.databinding.library.baseAdapters.BR;
-import com.trautmann.simplechatapp.rest.RestActions;
 import com.trautmann.simplechatapp.model.Chat;
-import com.trautmann.simplechatapp.model.ChatMessage;
+import com.trautmann.simplechatapp.rest.RestActions;
 import com.trautmann.simplechatapp.rest.response.CreateChatMessage;
 import com.trautmann.simplechatapp.rest.response.GetChatMessagesList;
 import com.trautmann.simplechatapp.rest.response.UpdateChat;
@@ -24,11 +21,9 @@ import io.reactivex.Single;
 
 public class ChatDetailActivityViewModel extends BaseObservable{
 
-    private Context context;
     private Chat chat;
 
-    public ChatDetailActivityViewModel(Context context, Chat chat) {
-        this.context = context;
+    public ChatDetailActivityViewModel(Chat chat) {
         this.chat = chat;
     }
 

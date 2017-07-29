@@ -39,7 +39,7 @@ public class ChatDetailActivity extends AppCompatActivity implements ChatActionD
                 DataBindingUtil.setContentView(this, R.layout.chat_detail_activity);
         int chatId = getIntent().getExtras().getInt(Constants.IntentArguments.CHAT_ID);
         String chatName = getIntent().getExtras().getString(Constants.IntentArguments.CHAT_NAME);
-        binding.setViewModel(new ChatDetailActivityViewModel(this,
+        binding.setViewModel(new ChatDetailActivityViewModel(
                 new Chat(chatId, chatName, null, null)));
 
         setSupportActionBar(binding.chatDetailToolbar);

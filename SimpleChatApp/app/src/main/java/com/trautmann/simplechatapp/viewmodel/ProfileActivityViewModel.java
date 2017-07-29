@@ -89,14 +89,11 @@ public class ProfileActivityViewModel extends BaseObservable {
 
     public View.OnClickListener onUpdateUserClicked(EditText nameEditText,
                                                     EditText emailEditText) {
-        return new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if (!TextUtils.isEmpty(nameEditText.getEditableText().toString())
-                        || !TextUtils.isEmpty(emailEditText.getEditableText().toString())) {
-                    updateUser(nameEditText.getEditableText().toString(),
-                            emailEditText.getEditableText().toString());
-                }
+        return view -> {
+            if (!TextUtils.isEmpty(nameEditText.getEditableText().toString())
+                    || !TextUtils.isEmpty(emailEditText.getEditableText().toString())) {
+                updateUser(nameEditText.getEditableText().toString(),
+                        emailEditText.getEditableText().toString());
             }
         };
     }
