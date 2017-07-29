@@ -4,6 +4,7 @@ import com.trautmann.simplechatapp.rest.response.CreateChat;
 import com.trautmann.simplechatapp.rest.response.CreateChatMessage;
 import com.trautmann.simplechatapp.rest.response.GetChatMessagesList;
 import com.trautmann.simplechatapp.rest.response.GetChatsList;
+import com.trautmann.simplechatapp.rest.response.UpdateChat;
 
 import io.reactivex.Single;
 import retrofit2.Response;
@@ -34,5 +35,11 @@ public interface ChatsService {
     @FormUrlEncoded
     Single<Response<CreateChat>> createChat(@Field("name") String chatName,
                                             @Field("message") String firstChatMessage);
+
+    @POST("chats/{id}")
+    @FormUrlEncoded
+    Single<Response<UpdateChat>> updateChat(@Path(value = "id") int chatId,
+                                            @Field("name") String newChatName);
+
 
 }
