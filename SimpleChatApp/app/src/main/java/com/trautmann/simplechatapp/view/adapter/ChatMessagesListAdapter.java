@@ -48,7 +48,7 @@ public class ChatMessagesListAdapter extends RecyclerView.Adapter<ChatMessagesLi
     @Override
     public void onBindViewHolder(ChatMessageBindingHolder holder, int position) {
         ChatMessageListItemBinding chatMessageListItemBinding = holder.chatMessageListItemBinding;
-        chatMessageListItemBinding.setViewModel(new ChatMessageListItemViewModel(context, chatMessages.get(position)));
+        chatMessageListItemBinding.setViewModel(new ChatMessageListItemViewModel(chatMessages.get(position)));
     }
 
     @Override

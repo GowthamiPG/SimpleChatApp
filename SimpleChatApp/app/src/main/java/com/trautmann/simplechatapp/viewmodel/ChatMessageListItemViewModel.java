@@ -11,11 +11,9 @@ import com.trautmann.simplechatapp.model.ChatMessage;
 public class ChatMessageListItemViewModel {
 
 
-    private Context context;
     private ChatMessage chatMessage;
 
-    public ChatMessageListItemViewModel(Context context, ChatMessage chatMessage) {
-        this.context = context;
+    public ChatMessageListItemViewModel(ChatMessage chatMessage) {
         this.chatMessage = chatMessage;
     }
 
