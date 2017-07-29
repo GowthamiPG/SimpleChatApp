@@ -89,6 +89,6 @@ public class MainActivity extends AppCompatActivity implements ChatActionDialog.
 
     @Override
     public void onRenameClicked(String name) {
-        
+
     }
 }
