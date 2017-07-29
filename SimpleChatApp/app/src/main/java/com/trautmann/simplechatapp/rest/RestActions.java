@@ -1,5 +1,6 @@
 package com.trautmann.simplechatapp.rest;
 
+import com.trautmann.simplechatapp.rest.response.CreateChat;
 import com.trautmann.simplechatapp.rest.response.CreateChatMessage;
 import com.trautmann.simplechatapp.rest.response.GenericResponse;
 import com.trautmann.simplechatapp.rest.response.GetChatMessagesList;
@@ -53,6 +54,13 @@ public class RestActions {
     public static Single<CreateChatMessage> createChatMessage(int chatId, String message) {
         RestAction<CreateChatMessage> action = new RestAction<>(
                 ServiceCreator.createService(ChatsService.class).createChatMessage(chatId, message));
+        return action.perform();
+    }
+
+
+    public static Single<CreateChat> createChat(String chatName, String firstChatMessage) {
+        RestAction<CreateChat> action = new RestAction<>(
+                ServiceCreator.createService(ChatsService.class).createChat(chatName, firstChatMessage));
         return action.perform();
     }
 }

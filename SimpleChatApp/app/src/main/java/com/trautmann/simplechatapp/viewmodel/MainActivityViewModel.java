@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 
 import com.trautmann.simplechatapp.rest.RestActions;
+import com.trautmann.simplechatapp.rest.response.CreateChat;
 import com.trautmann.simplechatapp.rest.response.GetChatsList;
 import com.trautmann.simplechatapp.view.ProfileActivity;
 
@@ -20,6 +21,10 @@ public class MainActivityViewModel {
 
     public Single<GetChatsList> getChatList() {
         return RestActions.getChatsList();
+    }
+
+    public Single<CreateChat> createChat(String chatName, String firstChatMessage) {
+        return RestActions.createChat(chatName, firstChatMessage);
     }
 
 

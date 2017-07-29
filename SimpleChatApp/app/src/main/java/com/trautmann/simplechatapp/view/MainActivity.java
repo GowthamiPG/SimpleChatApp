@@ -79,6 +79,11 @@ public class MainActivity extends AppCompatActivity implements CreateChatDialog.
 
     @Override
     public void onCreateClicked(String name, String message) {
-
+        binding.getViewModel().createChat(name, message)
+                .subscribe(createChat -> getChats(), throwable -> {
+                    //TODO: Recreate dialog if call fails
+                    Toast.makeText(MainActivity.this, "Couldn't send message",
+                            Toast.LENGTH_SHORT).show();
+                });
     }
 }
