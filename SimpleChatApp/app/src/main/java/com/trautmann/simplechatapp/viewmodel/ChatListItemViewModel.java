@@ -5,7 +5,7 @@ import android.content.Intent;
 import android.view.View;
 
 import com.trautmann.simplechatapp.R;
-import com.trautmann.simplechatapp.rest.model.Chat;
+import com.trautmann.simplechatapp.model.Chat;
 import com.trautmann.simplechatapp.util.Constants;
 import com.trautmann.simplechatapp.view.ChatDetailActivity;
 

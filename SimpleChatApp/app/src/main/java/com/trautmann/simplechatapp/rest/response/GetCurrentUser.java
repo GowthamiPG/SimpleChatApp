@@ -1,7 +1,7 @@
 package com.trautmann.simplechatapp.rest.response;
 
 import com.google.gson.annotations.SerializedName;
-import com.trautmann.simplechatapp.rest.model.User;
+import com.trautmann.simplechatapp.model.User;
 
 /**
  * Created by Brandon Trautmann

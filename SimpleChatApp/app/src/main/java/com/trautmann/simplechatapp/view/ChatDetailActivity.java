@@ -14,7 +14,7 @@ import android.widget.Toast;
 
 import com.trautmann.simplechatapp.R;
 import com.trautmann.simplechatapp.databinding.ChatDetailActivityBinding;
-import com.trautmann.simplechatapp.rest.model.Chat;
+import com.trautmann.simplechatapp.model.Chat;
 import com.trautmann.simplechatapp.util.Constants;
 import com.trautmann.simplechatapp.view.adapter.ChatMessageItemDecoration;
 import com.trautmann.simplechatapp.view.adapter.ChatMessagesListAdapter;

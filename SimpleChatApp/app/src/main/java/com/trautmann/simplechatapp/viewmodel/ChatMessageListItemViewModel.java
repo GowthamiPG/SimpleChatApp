@@ -2,7 +2,7 @@ package com.trautmann.simplechatapp.viewmodel;
 
 import android.content.Context;
 
-import com.trautmann.simplechatapp.rest.model.ChatMessage;
+import com.trautmann.simplechatapp.model.ChatMessage;
 
 /**
  * Created by Brandon Trautmann

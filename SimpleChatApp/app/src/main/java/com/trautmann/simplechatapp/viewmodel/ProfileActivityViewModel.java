@@ -12,7 +12,7 @@ import android.widget.Toast;
 
 import com.android.databinding.library.baseAdapters.BR;
 import com.trautmann.simplechatapp.rest.RestActions;
-import com.trautmann.simplechatapp.rest.model.User;
+import com.trautmann.simplechatapp.model.User;
 import com.trautmann.simplechatapp.rest.response.UpdateUser;
 import com.trautmann.simplechatapp.view.InitSessionActivity;
 

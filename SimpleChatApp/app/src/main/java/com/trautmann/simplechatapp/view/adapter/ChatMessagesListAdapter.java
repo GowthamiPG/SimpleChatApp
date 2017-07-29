@@ -8,7 +8,7 @@ import android.view.ViewGroup;
 
 import com.trautmann.simplechatapp.R;
 import com.trautmann.simplechatapp.databinding.ChatMessageListItemBinding;
-import com.trautmann.simplechatapp.rest.model.ChatMessage;
+import com.trautmann.simplechatapp.model.ChatMessage;
 import com.trautmann.simplechatapp.viewmodel.ChatMessageListItemViewModel;
 
 import java.util.List;

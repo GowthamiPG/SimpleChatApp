@@ -1,4 +1,4 @@
-package com.trautmann.simplechatapp.rest.model;
+package com.trautmann.simplechatapp.model;
 
 import com.google.gson.annotations.SerializedName;
 

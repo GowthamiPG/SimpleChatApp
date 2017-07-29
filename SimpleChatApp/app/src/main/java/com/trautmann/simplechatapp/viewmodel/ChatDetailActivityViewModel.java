@@ -10,8 +10,8 @@ import android.widget.EditText;
 
 import com.android.databinding.library.baseAdapters.BR;
 import com.trautmann.simplechatapp.rest.RestActions;
-import com.trautmann.simplechatapp.rest.model.Chat;
-import com.trautmann.simplechatapp.rest.model.ChatMessage;
+import com.trautmann.simplechatapp.model.Chat;
+import com.trautmann.simplechatapp.model.ChatMessage;
 import com.trautmann.simplechatapp.rest.response.CreateChatMessage;
 import com.trautmann.simplechatapp.rest.response.GetChatMessagesList;
 import com.trautmann.simplechatapp.rest.response.UpdateChat;

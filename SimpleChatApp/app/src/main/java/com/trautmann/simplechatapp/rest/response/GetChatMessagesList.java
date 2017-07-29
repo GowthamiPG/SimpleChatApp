@@ -1,8 +1,8 @@
 package com.trautmann.simplechatapp.rest.response;
 
 import com.google.gson.annotations.SerializedName;
-import com.trautmann.simplechatapp.rest.model.ChatMessage;
-import com.trautmann.simplechatapp.rest.model.MetaInformation;
+import com.trautmann.simplechatapp.model.ChatMessage;
+import com.trautmann.simplechatapp.model.MetaInformation;
 
 import java.util.List;
 
