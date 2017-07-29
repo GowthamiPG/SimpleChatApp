@@ -36,6 +36,7 @@ public class InitSessionViewModel extends BaseObservable{
 
     public void setLoggingIn(boolean loggingIn) {
         isLoggingIn = loggingIn;
+        notifyPropertyChanged(BR._all);
     }
 
     @Bindable
@@ -45,16 +46,11 @@ public class InitSessionViewModel extends BaseObservable{
 
     public void setRegistering(boolean registering) {
         isRegistering = registering;
+        notifyPropertyChanged(BR._all);
     }
 
     public View.OnClickListener onAccountStatusPromptClicked() {
-        return new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                setRegistering(!isRegistering());
-                notifyPropertyChanged(BR._all);
-            }
-        };
+        return view -> setRegistering(!isRegistering());
     }
 
     public View.OnClickListener onLoginClicked(EditText emailInput, EditText passwordInput) {
@@ -101,15 +97,12 @@ public class InitSessionViewModel extends BaseObservable{
         RestActions.login(email, password)
                 .doOnSubscribe(disposable -> {
                     setLoggingIn(true);
-                    notifyPropertyChanged(BR._all);
                 })
                 .subscribe(genericResponse -> {
                     setLoggingIn(false);
-                    notifyPropertyChanged(BR._all);
                     launchMainActivity();
                 }, throwable -> {
                     setLoggingIn(false);
-                    notifyPropertyChanged(BR._all);
                     Toast.makeText(context, "Login failed", Toast.LENGTH_SHORT).show();
                 });
     }
