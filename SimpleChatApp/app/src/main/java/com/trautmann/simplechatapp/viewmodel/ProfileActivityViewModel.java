@@ -15,9 +15,6 @@ import com.trautmann.simplechatapp.model.User;
 import com.trautmann.simplechatapp.rest.RestActions;
 import com.trautmann.simplechatapp.view.InitSessionActivity;
 
-import io.reactivex.annotations.NonNull;
-import io.reactivex.functions.Consumer;
-
 /**
  * Created by Brandon Trautmann
  */
@@ -106,8 +103,9 @@ public class ProfileActivityViewModel extends BaseObservable {
 
     public void updateUser(String name, String email) {
         RestActions.updateUser(name, email)
-                .subscribe(updateUser -> setEditingProfile(false), throwable -> Toast.makeText(context, "Couldn't update profile. Try again " +
-                        "later!", Toast.LENGTH_SHORT));
+                .subscribe(updateUser -> setEditingProfile(false),
+                        throwable -> Toast.makeText(context, "Couldn't update profile. Try again " +
+                        "later!", Toast.LENGTH_SHORT).show());
     }
 
     public void logOut() {
