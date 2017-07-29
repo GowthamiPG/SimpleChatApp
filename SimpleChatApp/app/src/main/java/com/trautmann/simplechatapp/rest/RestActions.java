@@ -40,9 +40,11 @@ public class RestActions {
         return action.perform();
     }
 
-    public static Single<CreateUser> createUser() {
+    public static Single<CreateUser> createUser(String name, String email, String password,
+                                                String passwordConfirmation) {
         RestAction<CreateUser> action = new RestAction<>(
-                ServiceCreator.createService(UserService.class).createUser());
+                ServiceCreator.createService(UserService.class).createUser(name, email, password,
+                        passwordConfirmation));
         return action.perform();
     }
 

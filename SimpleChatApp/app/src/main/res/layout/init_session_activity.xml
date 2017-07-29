@@ -78,7 +78,7 @@
                 android:layout_centerInParent="true"
                 android:background="@drawable/background_large_button"
                 android:enabled="@{viewModel.loggingIn ? false : true}"
-                android:onClick="@{viewModel.registering ? viewModel.onRegisterClicked() : viewModel.onLoginClicked(emailEditText, passwordEditText)}"
+                android:onClick="@{viewModel.registering ? viewModel.onRegisterClicked(nameEditText, emailEditText, passwordEditText, confirmPasswordEditText) : viewModel.onLoginClicked(emailEditText, passwordEditText)}"
                 android:text="@{viewModel.registering ? @string/register_button_text : @string/login_button_text}"
                 android:visibility="@{viewModel.loggingIn ? View.GONE : View.VISIBLE}" />
 

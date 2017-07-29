@@ -69,15 +69,15 @@ public class InitSessionViewModel extends BaseObservable{
 
     public View.OnClickListener onRegisterClicked(EditText nameInput, EditText emailInput,
                                                   EditText passwordInput, EditText confirmPwInput) {
-        return new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if (areValidRegisterInputs(nameInput, emailInput, passwordInput, confirmPwInput)) {
-                    String name = nameInput.getEditableText().toString();
-                    String email = emailInput.getEditableText().toString();
-                    String password = passwordInput.getEditableText().toString();
-                    registerUser(name, email, password);
-                }
+        return view -> {
+            if (areValidRegisterInputs(nameInput, emailInput, passwordInput, confirmPwInput)) {
+                String name = nameInput.getEditableText().toString();
+                String email = emailInput.getEditableText().toString();
+                String password = passwordInput.getEditableText().toString();
+                String passwordConfirmation = confirmPwInput.getEditableText().toString();
+                registerUser(name, email, password, passwordConfirmation);
+            } else {
+                Toast.makeText(context, "Please check input", Toast.LENGTH_SHORT).show();
             }
         };
     }
@@ -120,7 +120,15 @@ public class InitSessionViewModel extends BaseObservable{
         context.startActivity(intent);
     }
 
-    public void registerUser(String name, String email, String password) {
+    public void registerUser(String name, String email, String password,
+                             String passwordConfirmation) {
+        RestActions.createUser(name, email, password, passwordConfirmation)
+                .doOnSubscribe(disposable -> {
+                    setLoggingIn(true);
+                    notifyPropertyChanged(BR._all);
+                })
+                .subscribe(createUser -> launchMainActivity(), throwable -> Toast.makeText(context, "Couldn't sign you up." +
+                        " Try again later!", Toast.LENGTH_SHORT).show());
 
     }
 }
