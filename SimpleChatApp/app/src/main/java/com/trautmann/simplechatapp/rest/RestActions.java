@@ -2,6 +2,7 @@ package com.trautmann.simplechatapp.rest;
 
 import com.trautmann.simplechatapp.rest.response.CreateChat;
 import com.trautmann.simplechatapp.rest.response.CreateChatMessage;
+import com.trautmann.simplechatapp.rest.response.CreateUser;
 import com.trautmann.simplechatapp.rest.response.GenericResponse;
 import com.trautmann.simplechatapp.rest.response.GetChatMessagesList;
 import com.trautmann.simplechatapp.rest.response.GetChatsList;
@@ -36,6 +37,12 @@ public class RestActions {
     public static Single<GetCurrentUser> getCurrentUser() {
         RestAction<GetCurrentUser> action = new RestAction<>(
                 ServiceCreator.createService(UserService.class).getCurrentUser());
+        return action.perform();
+    }
+
+    public static Single<CreateUser> createUser() {
+        RestAction<CreateUser> action = new RestAction<>(
+                ServiceCreator.createService(UserService.class).createUser());
         return action.perform();
     }
 
