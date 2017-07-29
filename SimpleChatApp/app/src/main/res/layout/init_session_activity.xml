@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <data>
 
@@ -62,6 +63,15 @@
                 android:visibility="@{viewModel.loggingIn ? View.VISIBLE : View.GONE}" />
 
         </RelativeLayout>
+
+        <TextView
+            android:onClick="@{viewModel.onAccountStatusPromptClicked()}"
+            android:layout_marginTop="@dimen/vertical_spacing"
+            tools:text="@string/login_account_prompt"
+            android:text="@{viewModel.registering ? @string/back_to_login_text : @string/register_button_text}"
+            android:layout_gravity="center_horizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
 
 
     </LinearLayout>

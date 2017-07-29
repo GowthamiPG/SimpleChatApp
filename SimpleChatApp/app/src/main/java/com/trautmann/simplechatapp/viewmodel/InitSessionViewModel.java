@@ -3,6 +3,7 @@ package com.trautmann.simplechatapp.viewmodel;
 import android.content.Context;
 import android.content.Intent;
 import android.databinding.BaseObservable;
+import android.databinding.Bindable;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.EditText;
@@ -19,19 +20,41 @@ import com.trautmann.simplechatapp.view.MainActivity;
 public class InitSessionViewModel extends BaseObservable{
 
     private Context context;
+    private boolean isRegistering;
     private boolean isLoggingIn;
 
     public InitSessionViewModel(Context context) {
         this.context = context;
         setLoggingIn(false);
+        setRegistering(false);
     }
 
+    @Bindable
     public boolean isLoggingIn() {
         return isLoggingIn;
     }
 
     public void setLoggingIn(boolean loggingIn) {
         isLoggingIn = loggingIn;
+    }
+
+    @Bindable
+    public boolean isRegistering() {
+        return isRegistering;
+    }
+
+    public void setRegistering(boolean registering) {
+        isRegistering = registering;
+    }
+
+    public View.OnClickListener onAccountStatusPromptClicked() {
+        return new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                setRegistering(!isRegistering());
+                notifyPropertyChanged(BR._all);
+            }
+        };
     }
 
     public View.OnClickListener onLoginClicked(EditText emailInput, EditText passwordInput) {

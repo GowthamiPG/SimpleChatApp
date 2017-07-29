@@ -8,6 +8,9 @@
     <string name="email_hint_text">Email</string>
     <string name="password_hint_text">Password</string>
     <string name="login_button_text">Log In</string>
+    <string name="register_button_text">No account? <u>Sign up</u></string>
+    <string name="back_to_login_text">Already have an account? <u>Log in</u></string>
+
 
     <!-- Profile -->
     <string name="profile_menu_action_title">Profile</string>
@@ -30,6 +33,7 @@
     <string name="chat_last_message_field">Chat Last Message</string>
     <string name="profile_name_field">Name</string>
     <string name="profile_email_field">Email Address</string>
+    <string name="login_account_prompt">Account status? <u>prompt</u></string>
 
 
 
