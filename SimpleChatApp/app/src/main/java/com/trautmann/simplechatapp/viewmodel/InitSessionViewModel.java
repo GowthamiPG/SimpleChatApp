@@ -118,7 +118,6 @@ public class InitSessionViewModel extends BaseObservable{
         RestActions.createUser(name, email, password, passwordConfirmation)
                 .doOnSubscribe(disposable -> {
                     setLoggingIn(true);
-                    notifyPropertyChanged(BR._all);
                 })
                 .subscribe(createUser -> launchMainActivity(), throwable -> Toast.makeText(context, "Couldn't sign you up." +
                         " Try again later!", Toast.LENGTH_SHORT).show());
