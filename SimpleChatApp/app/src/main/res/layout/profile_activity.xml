@@ -5,7 +5,8 @@
 
     <data>
 
-        <import type="android.view.View"/>
+        <import type="android.view.View" />
+
         <variable
             name="viewModel"
             type="com.trautmann.simplechatapp.viewmodel.ProfileActivityViewModel" />
@@ -24,7 +25,21 @@
             android:layout_marginTop="@dimen/vertical_spacing"
             android:gravity="center_horizontal"
             android:text="@{viewModel.userName}"
+            android:visibility="@{viewModel.editingProfile ? View.GONE : View.VISIBLE}"
             tools:text="@string/profile_name_field" />
+
+        <EditText
+            android:id="@+id/editNameEditText"
+            style="@style/DefaultPadding"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/vertical_spacing"
+            android:background="@drawable/background_text_input"
+            android:enabled="@{viewModel.networking ? false : true}"
+            android:gravity="center_horizontal"
+            android:hint="@string/name_hint_text"
+            android:inputType="textEmailAddress"
+            android:visibility="@{viewModel.editingProfile ? View.VISIBLE : View.GONE}" />
 
         <TextView
             android:id="@+id/profileEmailTextView"
@@ -33,7 +48,21 @@
             android:layout_marginTop="@dimen/vertical_spacing"
             android:gravity="center_horizontal"
             android:text="@{viewModel.userEmail}"
+            android:visibility="@{viewModel.editingProfile ? View.GONE : View.VISIBLE}"
             tools:text="@string/profile_email_field" />
+
+        <EditText
+            android:id="@+id/editEmailEditText"
+            style="@style/DefaultPadding"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/vertical_spacing"
+            android:background="@drawable/background_text_input"
+            android:enabled="@{viewModel.networking ? false : true}"
+            android:gravity="center_horizontal"
+            android:hint="@string/email_hint_text"
+            android:inputType="textEmailAddress"
+            android:visibility="@{viewModel.editingProfile ? View.VISIBLE : View.GONE}" />
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -41,11 +70,11 @@
             android:layout_marginTop="@dimen/vertical_spacing">
 
             <ProgressBar
-                android:visibility="@{viewModel.loggingOut ? View.VISIBLE : View.GONE}"
                 android:id="@+id/logOutProgressBar"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_centerInParent="true" />
+                android:layout_centerInParent="true"
+                android:visibility="@{viewModel.networking ? View.VISIBLE : View.GONE}" />
 
             <Button
                 android:id="@+id/profileLogOutButton"
@@ -53,9 +82,10 @@
                 android:layout_height="wrap_content"
                 android:layout_centerInParent="true"
                 android:background="@drawable/background_large_button"
-                android:onClick="@{viewModel.onLogOutClicked()}"
-                android:text="@string/profile_log_out_button_text"
-                android:visibility="@{viewModel.loggingOut ? View.GONE : View.VISIBLE}" />
+                android:enabled="@{viewModel.networking ? false : true}"
+                android:onClick="@{viewModel.editingProfile ? viewModel.onUpdateUserClicked(editNameEditText, editEmailEditText) : viewModel.onLogOutClicked()}"
+                android:text="@{viewModel.editingProfile ? @string/edit_profile_submit_button_text : @string/profile_log_out_button_text}"
+                android:visibility="@{viewModel.networking? View.GONE : View.VISIBLE}" />
 
 
         </RelativeLayout>

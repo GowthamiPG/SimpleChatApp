@@ -18,6 +18,8 @@
     <!-- Profile -->
     <string name="profile_menu_action_title">Profile</string>
     <string name="profile_log_out_button_text">Log out</string>
+    <string name="edit_profile_menu_action_title">Edit profile</string>
+    <string name="edit_profile_submit_button_text">Submit</string>
 
     <!-- Chat -->
     <string name="chat_last_message">%1$s: %2$s</string>

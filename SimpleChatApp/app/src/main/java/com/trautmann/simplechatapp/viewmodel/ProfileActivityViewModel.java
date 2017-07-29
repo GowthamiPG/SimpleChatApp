@@ -4,13 +4,20 @@ import android.content.Context;
 import android.content.Intent;
 import android.databinding.BaseObservable;
 import android.databinding.Bindable;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
+import android.widget.EditText;
+import android.widget.Toast;
 
 import com.android.databinding.library.baseAdapters.BR;
 import com.trautmann.simplechatapp.rest.RestActions;
 import com.trautmann.simplechatapp.rest.model.User;
+import com.trautmann.simplechatapp.rest.response.UpdateUser;
 import com.trautmann.simplechatapp.view.InitSessionActivity;
+
+import io.reactivex.annotations.NonNull;
+import io.reactivex.functions.Consumer;
 
 /**
  * Created by Brandon Trautmann
@@ -20,11 +27,13 @@ public class ProfileActivityViewModel extends BaseObservable {
 
     private Context context;
     private User user;
-    private boolean isLoggingOut;
+    private boolean isNetworking;
+    private boolean isEditingProfile;
 
     public ProfileActivityViewModel(Context context) {
         this.context = context;
-        setLoggingOut(false);
+        setNetworking(false);
+        setEditingProfile(false);
     }
 
     public User getUser() {
@@ -33,6 +42,7 @@ public class ProfileActivityViewModel extends BaseObservable {
 
     public void setUser(User user) {
         this.user = user;
+        notifyPropertyChanged(BR._all);
     }
 
     @Bindable
@@ -45,12 +55,24 @@ public class ProfileActivityViewModel extends BaseObservable {
         return getUser() == null ? "" : getUser().getEmail();
     }
 
-    public boolean isLoggingOut() {
-        return isLoggingOut;
+    @Bindable
+    public boolean isNetworking() {
+        return isNetworking;
     }
 
-    public void setLoggingOut(boolean loggingOut) {
-        isLoggingOut = loggingOut;
+    public void setNetworking(boolean networking) {
+        isNetworking = networking;
+        notifyPropertyChanged(BR._all);
+    }
+
+    @Bindable
+    public boolean isEditingProfile() {
+        return isEditingProfile;
+    }
+
+    public void setEditingProfile(boolean editingProfile) {
+        isEditingProfile = editingProfile;
+        notifyPropertyChanged(BR._all);
     }
 
     public void getProfile() {
@@ -58,7 +80,6 @@ public class ProfileActivityViewModel extends BaseObservable {
                 .subscribe(getCurrentUser -> {
                     if (getCurrentUser.getUser() != null) {
                         setUser(getCurrentUser.getUser());
-                        notifyPropertyChanged(BR._all);
                     }
 
                 }, throwable -> {
@@ -70,22 +91,49 @@ public class ProfileActivityViewModel extends BaseObservable {
         return view -> logOut();
     }
 
+    public View.OnClickListener onUpdateUserClicked(EditText nameEditText,
+                                                    EditText emailEditText) {
+        return new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (!TextUtils.isEmpty(nameEditText.getEditableText().toString())
+                        || !TextUtils.isEmpty(emailEditText.getEditableText().toString())) {
+                    updateUser(nameEditText.getEditableText().toString(),
+                            emailEditText.getEditableText().toString());
+                }
+            }
+        };
+    }
+
+    public void updateUser(String name, String email) {
+        RestActions.updateUser(name, email)
+                .subscribe(new Consumer<UpdateUser>() {
+                    @Override
+                    public void accept(@NonNull UpdateUser updateUser) throws Exception {
+                        setEditingProfile(false);
+                    }
+                }, new Consumer<Throwable>() {
+                    @Override
+                    public void accept(@NonNull Throwable throwable) throws Exception {
+                        Toast.makeText(context, "Couldn't update profile. Try again " +
+                                "later!", Toast.LENGTH_SHORT);
+                    }
+                });
+    }
+
     public void logOut() {
         RestActions.logout()
                 .doOnSubscribe(disposable -> {
-                    setLoggingOut(true);
-                    notifyPropertyChanged(BR._all);
+                    setNetworking(true);
                 })
                 .subscribe(genericResponse -> {
-                    setLoggingOut(false);
-                    notifyPropertyChanged(BR._all);
+                    setNetworking(false);
                     launchInitSessionActivity();
 
                 }, throwable -> {
                     // TODO: We don't care if the call fails as the user wants to
                     // log out regardless. Use a Completable(?) instead of Single
-                    setLoggingOut(false);
-                    notifyPropertyChanged(BR._all);
+                    setNetworking(false);
                     launchInitSessionActivity();
 
                 });

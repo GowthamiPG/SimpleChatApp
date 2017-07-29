@@ -1,5 +1,7 @@
 package com.trautmann.simplechatapp.rest;
 
+import android.support.annotation.Nullable;
+
 import com.trautmann.simplechatapp.rest.response.CreateChat;
 import com.trautmann.simplechatapp.rest.response.CreateChatMessage;
 import com.trautmann.simplechatapp.rest.response.CreateUser;
@@ -8,6 +10,7 @@ import com.trautmann.simplechatapp.rest.response.GetChatMessagesList;
 import com.trautmann.simplechatapp.rest.response.GetChatsList;
 import com.trautmann.simplechatapp.rest.response.GetCurrentUser;
 import com.trautmann.simplechatapp.rest.response.UpdateChat;
+import com.trautmann.simplechatapp.rest.response.UpdateUser;
 import com.trautmann.simplechatapp.rest.service.AuthService;
 import com.trautmann.simplechatapp.rest.service.ChatsService;
 import com.trautmann.simplechatapp.rest.service.UserService;
@@ -37,6 +40,12 @@ public class RestActions {
     public static Single<GetCurrentUser> getCurrentUser() {
         RestAction<GetCurrentUser> action = new RestAction<>(
                 ServiceCreator.createService(UserService.class).getCurrentUser());
+        return action.perform();
+    }
+
+    public static Single<UpdateUser> updateUser(@Nullable String name, @Nullable String email) {
+        RestAction<UpdateUser> action = new RestAction<>(
+                ServiceCreator.createService(UserService.class).updateUser(name, email));
         return action.perform();
     }
 
