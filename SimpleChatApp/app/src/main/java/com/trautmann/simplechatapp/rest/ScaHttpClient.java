@@ -9,7 +9,7 @@ import okhttp3.logging.HttpLoggingInterceptor;
  * Created by Brandon Trautmann
  */
 
-public class HttpClientFactory {
+public class ScaHttpClient {
 
     private static OkHttpClient httpClient;
 

@@ -19,7 +19,7 @@ public class ServiceCreator {
 
     public static <S> S createService(Class<S> serviceClass) {
         if (retrofit == null) {
-            retrofit = builder.client(HttpClientFactory.getInstance()).build();
+            retrofit = builder.client(ScaHttpClient.getInstance()).build();
         }
         return retrofit.create(serviceClass);
     }
