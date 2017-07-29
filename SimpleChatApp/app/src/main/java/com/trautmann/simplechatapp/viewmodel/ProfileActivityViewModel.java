@@ -11,9 +11,8 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.android.databinding.library.baseAdapters.BR;
-import com.trautmann.simplechatapp.rest.RestActions;
 import com.trautmann.simplechatapp.model.User;
-import com.trautmann.simplechatapp.rest.response.UpdateUser;
+import com.trautmann.simplechatapp.rest.RestActions;
 import com.trautmann.simplechatapp.view.InitSessionActivity;
 
 import io.reactivex.annotations.NonNull;
@@ -107,18 +106,8 @@ public class ProfileActivityViewModel extends BaseObservable {
 
     public void updateUser(String name, String email) {
         RestActions.updateUser(name, email)
-                .subscribe(new Consumer<UpdateUser>() {
-                    @Override
-                    public void accept(@NonNull UpdateUser updateUser) throws Exception {
-                        setEditingProfile(false);
-                    }
-                }, new Consumer<Throwable>() {
-                    @Override
-                    public void accept(@NonNull Throwable throwable) throws Exception {
-                        Toast.makeText(context, "Couldn't update profile. Try again " +
-                                "later!", Toast.LENGTH_SHORT);
-                    }
-                });
+                .subscribe(updateUser -> setEditingProfile(false), throwable -> Toast.makeText(context, "Couldn't update profile. Try again " +
+                        "later!", Toast.LENGTH_SHORT));
     }
 
     public void logOut() {
