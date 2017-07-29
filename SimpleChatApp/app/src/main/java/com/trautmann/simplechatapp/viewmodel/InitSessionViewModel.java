@@ -67,6 +67,31 @@ public class InitSessionViewModel extends BaseObservable{
         };
     }
 
+    public View.OnClickListener onRegisterClicked(EditText nameInput, EditText emailInput,
+                                                  EditText passwordInput, EditText confirmPwInput) {
+        return new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (areValidRegisterInputs(nameInput, emailInput, passwordInput, confirmPwInput)) {
+                    String name = nameInput.getEditableText().toString();
+                    String email = emailInput.getEditableText().toString();
+                    String password = passwordInput.getEditableText().toString();
+                    registerUser(name, email, password);
+                }
+            }
+        };
+    }
+
+    public boolean areValidRegisterInputs(EditText nameInput, EditText emailInput,
+                                          EditText passwordInput, EditText confirmPwInput) {
+        return !TextUtils.isEmpty(nameInput.getEditableText().toString())
+                && !TextUtils.isEmpty(emailInput.getEditableText().toString())
+                && !TextUtils.isEmpty(passwordInput.getEditableText().toString())
+                && !TextUtils.isEmpty(confirmPwInput.getEditableText().toString())
+                && confirmPwInput.getEditableText().toString()
+                .equals(passwordInput.getEditableText().toString());
+    }
+
     public boolean areValidLoginInputs(EditText loginInput, EditText passwordInput) {
         return !TextUtils.isEmpty(loginInput.getEditableText().toString())
                 && !TextUtils.isEmpty(passwordInput.getEditableText().toString());
@@ -95,7 +120,7 @@ public class InitSessionViewModel extends BaseObservable{
         context.startActivity(intent);
     }
 
-    public void registerUser() {
+    public void registerUser(String name, String email, String password) {
 
     }
 }
