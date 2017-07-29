@@ -21,6 +21,7 @@
     <string name="new_chat_dialog_title">Create a Chat</string>
     <string name="new_chat_dialog_create_button_text">Create</string>
     <string name="new_chat_dialog_cancel_button_text">Cancel</string>
+    <string name="chat_edit_name_menu_action_title">Edit name</string>
 
     <!-- Tools (placeholders, dev use only) -->
     <string name="chat_name_field">Chat Name</string>

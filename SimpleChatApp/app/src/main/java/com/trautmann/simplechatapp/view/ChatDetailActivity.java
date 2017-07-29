@@ -7,6 +7,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.text.TextUtils;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.widget.Toast;
 
 import com.trautmann.simplechatapp.R;
@@ -53,6 +56,23 @@ public class ChatDetailActivity extends AppCompatActivity {
 
         getChatMessages(chatId);
 
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.chat_detail_activity_menu, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.editChatButton:
+                Log.d("Log", "EDIT CHAT!");
+                return true;
+        }
+        return false;
     }
 
     //TODO: Use Data binding to handle onClick
