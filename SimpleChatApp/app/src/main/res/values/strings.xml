@@ -19,7 +19,9 @@
     <string name="new_chat_name_hint_text">New chat name</string>
     <string name="new_chat_message_hint_text">New chat message</string>
     <string name="new_chat_dialog_title">Create a Chat</string>
+    <string name="rename_chat_dialog_title">Rename Chat</string>
     <string name="new_chat_dialog_create_button_text">Create</string>
+    <string name="rename_chat_dialog_rename_button_text">Rename</string>
     <string name="new_chat_dialog_cancel_button_text">Cancel</string>
     <string name="chat_edit_name_menu_action_title">Edit name</string>
 

@@ -14,7 +14,7 @@ import android.widget.Toast;
 import com.trautmann.simplechatapp.R;
 import com.trautmann.simplechatapp.databinding.MainActivityBinding;
 import com.trautmann.simplechatapp.view.adapter.ChatsListAdapter;
-import com.trautmann.simplechatapp.view.dialog.CreateChatDialog;
+import com.trautmann.simplechatapp.view.dialog.ChatActionDialog;
 import com.trautmann.simplechatapp.viewmodel.MainActivityViewModel;
 
 /**
@@ -22,7 +22,7 @@ import com.trautmann.simplechatapp.viewmodel.MainActivityViewModel;
  * Activity for the user to view their messages list
  */
 
-public class MainActivity extends AppCompatActivity implements CreateChatDialog.ICreateChat {
+public class MainActivity extends AppCompatActivity implements ChatActionDialog.ICreateChat {
 
     private MainActivityBinding binding;
     private ChatsListAdapter adapter;
@@ -73,8 +73,8 @@ public class MainActivity extends AppCompatActivity implements CreateChatDialog.
     }
 
     public void onCreateChatFabClicked(View view) {
-        CreateChatDialog createChatDialog = new CreateChatDialog();
-        createChatDialog.show(getSupportFragmentManager(), "createChat");
+        ChatActionDialog chatActionDialog = new ChatActionDialog();
+        chatActionDialog.show(getSupportFragmentManager(), "createChat");
     }
 
     @Override
@@ -85,5 +85,10 @@ public class MainActivity extends AppCompatActivity implements CreateChatDialog.
                     Toast.makeText(MainActivity.this, "Couldn't send message",
                             Toast.LENGTH_SHORT).show();
                 });
+    }
+
+    @Override
+    public void onRenameClicked(String name) {
+        
     }
 }
