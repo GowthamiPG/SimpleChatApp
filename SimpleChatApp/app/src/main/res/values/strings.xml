@@ -18,8 +18,9 @@
     <string name="new_message_hint_text">New chat message</string>
     <string name="new_chat_name_hint_text">New chat name</string>
     <string name="new_chat_message_hint_text">New chat message</string>
-    <string name="new_chat_create_button_text">Create</string>
-    <string name="new_chat_cancel_button_text">Cancele</string>
+    <string name="new_chat_dialog_title">Create a Chat</string>
+    <string name="new_chat_dialog_create_button_text">Create</string>
+    <string name="new_chat_dialog_cancel_button_text">Cancel</string>
 
     <!-- Tools (placeholders, dev use only) -->
     <string name="chat_name_field">Chat Name</string>

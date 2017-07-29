@@ -8,6 +8,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.Toast;
 
 import com.trautmann.simplechatapp.R;
@@ -69,6 +70,11 @@ public class MainActivity extends AppCompatActivity implements CreateChatDialog.
                     }
                 }, throwable -> Toast.makeText(MainActivity.this,
                         "Error loading chats", Toast.LENGTH_SHORT).show());
+    }
+
+    public void onCreateChatFabClicked(View view) {
+        CreateChatDialog createChatDialog = new CreateChatDialog();
+        createChatDialog.show(getSupportFragmentManager(), "createChat");
     }
 
     @Override

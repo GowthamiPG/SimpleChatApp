@@ -28,19 +28,17 @@ public class CreateChatDialog extends DialogFragment {
 
     private ICreateChat listener;
 
-    public CreateChatDialog() {
-        try {
-            listener = ((ICreateChat)getActivity());
-        } catch (ClassCastException e) {
-            dismiss();
-            Log.d("CreateChatDialog",getActivity().getClass().getSimpleName() + " does not" +
-                    "implement ICreateChat interface");
-        }
-    }
-
     @NonNull
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
+
+        try {
+            listener = ((ICreateChat) getActivity());
+        } catch (ClassCastException e) {
+            dismiss();
+            Log.d("CreateChatDialog", getActivity().getClass().getSimpleName() + " does not" +
+                    "implement ICreateChat interface");
+        }
 
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
 
@@ -53,7 +51,9 @@ public class CreateChatDialog extends DialogFragment {
 
         builder.setView(view);
 
-        builder.setPositiveButton(R.string.new_chat_create_button_text, new DialogInterface.OnClickListener() {
+        builder.setTitle(R.string.new_chat_dialog_title);
+
+        builder.setPositiveButton(R.string.new_chat_dialog_create_button_text, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
                 if (isFormFilled(nameEditText, messageEditText)) {
@@ -62,6 +62,7 @@ public class CreateChatDialog extends DialogFragment {
                 }
             }
         });
+        builder.setNegativeButton(R.string.new_chat_dialog_cancel_button_text, null);
         return builder.create();
     }
 
