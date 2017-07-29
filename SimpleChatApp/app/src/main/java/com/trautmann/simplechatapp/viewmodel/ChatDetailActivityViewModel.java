@@ -49,13 +49,6 @@ public class ChatDetailActivityViewModel extends BaseObservable{
         return chat.getId();
     }
 
-    public final ObservableArrayList<ChatMessage> chatMessages =
-            new ObservableArrayList<>();
-
-    public ObservableArrayList<ChatMessage> getChatMessages() {
-        return chatMessages;
-    }
-
     public Single<GetChatMessagesList> getChatMessagesList(int chatId) {
         return RestActions.getChatMessagesList(chatId);
     }
