@@ -21,14 +21,14 @@ import com.trautmann.simplechatapp.util.Constants;
 
 public class ChatActionDialog extends DialogFragment {
 
-    public interface ICreateChat {
+    public interface IChatAction {
 
         void onCreateClicked(String name, String message);
         void onRenameClicked(String name);
 
     }
 
-    private ICreateChat listener;
+    private IChatAction listener;
     private String action;
 
     private boolean isCreateChat() {
@@ -42,7 +42,7 @@ public class ChatActionDialog extends DialogFragment {
         } else {
             dismiss();
             Log.e("ChatActionDialog", getActivity().getClass().getSimpleName() + " does not" +
-                    "specify an action");
+                    " specify an action");
         }
     }
 
@@ -54,11 +54,11 @@ public class ChatActionDialog extends DialogFragment {
     public Dialog onCreateDialog(Bundle savedInstanceState) {
 
         try {
-            listener = ((ICreateChat) getActivity());
+            listener = ((IChatAction) getActivity());
         } catch (ClassCastException e) {
             dismiss();
             Log.e("ChatActionDialog", getActivity().getClass().getSimpleName() + " does not" +
-                    "implement ICreateChat interface");
+                    "implement IChatAction interface");
         }
 
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());

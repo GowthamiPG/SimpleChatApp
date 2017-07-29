@@ -13,6 +13,7 @@ import android.widget.Toast;
 
 import com.trautmann.simplechatapp.R;
 import com.trautmann.simplechatapp.databinding.MainActivityBinding;
+import com.trautmann.simplechatapp.util.Constants;
 import com.trautmann.simplechatapp.view.adapter.ChatsListAdapter;
 import com.trautmann.simplechatapp.view.dialog.ChatActionDialog;
 import com.trautmann.simplechatapp.viewmodel.MainActivityViewModel;
@@ -22,7 +23,7 @@ import com.trautmann.simplechatapp.viewmodel.MainActivityViewModel;
  * Activity for the user to view their messages list
  */
 
-public class MainActivity extends AppCompatActivity implements ChatActionDialog.ICreateChat {
+public class MainActivity extends AppCompatActivity implements ChatActionDialog.IChatAction {
 
     private MainActivityBinding binding;
     private ChatsListAdapter adapter;
@@ -74,7 +75,11 @@ public class MainActivity extends AppCompatActivity implements ChatActionDialog.
 
     public void onCreateChatFabClicked(View view) {
         ChatActionDialog chatActionDialog = new ChatActionDialog();
-        chatActionDialog.show(getSupportFragmentManager(), "createChat");
+        Bundle args = new Bundle();
+        args.putString(Constants.DialogArguments.CHAT_ACTION,
+                Constants.DialogArguments.CHAT_ACTION_CREATE);
+        chatActionDialog.setArguments(args);
+        chatActionDialog.show(getSupportFragmentManager(), "chatAction");
     }
 
     @Override
@@ -89,6 +94,6 @@ public class MainActivity extends AppCompatActivity implements ChatActionDialog.
 
     @Override
     public void onRenameClicked(String name) {
-
+        // Not implemented
     }
 }

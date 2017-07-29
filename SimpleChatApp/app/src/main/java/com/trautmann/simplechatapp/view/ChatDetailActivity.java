@@ -18,13 +18,14 @@ import com.trautmann.simplechatapp.rest.model.Chat;
 import com.trautmann.simplechatapp.util.Constants;
 import com.trautmann.simplechatapp.view.adapter.ChatMessageItemDecoration;
 import com.trautmann.simplechatapp.view.adapter.ChatMessagesListAdapter;
+import com.trautmann.simplechatapp.view.dialog.ChatActionDialog;
 import com.trautmann.simplechatapp.viewmodel.ChatDetailActivityViewModel;
 
 /**
  * Created by Brandon Trautmann
  */
 
-public class ChatDetailActivity extends AppCompatActivity {
+public class ChatDetailActivity extends AppCompatActivity implements ChatActionDialog.IChatAction {
 
     private ChatDetailActivityBinding binding;
     private ChatMessagesListAdapter adapter;
@@ -69,7 +70,12 @@ public class ChatDetailActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.editChatButton:
-                Log.d("Log", "EDIT CHAT!");
+                ChatActionDialog chatActionDialog = new ChatActionDialog();
+                Bundle args = new Bundle();
+                args.putString(Constants.DialogArguments.CHAT_ACTION,
+                        Constants.DialogArguments.CHAT_ACTION_RENAME);
+                chatActionDialog.setArguments(args);
+                chatActionDialog.show(getSupportFragmentManager(), "chatAction");
                 return true;
         }
         return false;
@@ -106,4 +112,20 @@ public class ChatDetailActivity extends AppCompatActivity {
     }
 
 
+    @Override
+    public void onCreateClicked(String name, String message) {
+        // Not implemented
+    }
+
+    @Override
+    public void onRenameClicked(String name) {
+        binding.getViewModel().updateChat(name)
+                .doOnSubscribe(disposable -> {
+                    //TODO Progress
+                })
+                .subscribe(updateChat -> {
+
+                }, throwable -> Toast.makeText(this,
+                        "Unable to rename chat", Toast.LENGTH_SHORT).show());
+    }
 }

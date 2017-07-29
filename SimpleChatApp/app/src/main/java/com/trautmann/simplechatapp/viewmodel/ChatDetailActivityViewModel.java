@@ -2,16 +2,19 @@ package com.trautmann.simplechatapp.viewmodel;
 
 import android.content.Context;
 import android.databinding.BaseObservable;
+import android.databinding.Bindable;
 import android.databinding.ObservableArrayList;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.EditText;
 
+import com.android.databinding.library.baseAdapters.BR;
 import com.trautmann.simplechatapp.rest.RestActions;
 import com.trautmann.simplechatapp.rest.model.Chat;
 import com.trautmann.simplechatapp.rest.model.ChatMessage;
 import com.trautmann.simplechatapp.rest.response.CreateChatMessage;
 import com.trautmann.simplechatapp.rest.response.GetChatMessagesList;
+import com.trautmann.simplechatapp.rest.response.UpdateChat;
 
 import io.reactivex.Single;
 
@@ -37,6 +40,7 @@ public class ChatDetailActivityViewModel extends BaseObservable{
         this.chat = chat;
     }
 
+    @Bindable
     public String getTitle() {
         return chat.getName();
     }
@@ -58,6 +62,15 @@ public class ChatDetailActivityViewModel extends BaseObservable{
 
     public Single<CreateChatMessage> createChatMessage(String message) {
         return RestActions.createChatMessage(getChatId(), message);
+    }
+
+
+    public Single<UpdateChat> updateChat(String newChatName) {
+        return RestActions.updateChat(chat.getId(), newChatName)
+                .doOnSuccess(updateChat -> {
+                    chat.setName(newChatName);
+                    notifyPropertyChanged(BR._all);
+                });
     }
 
     // When we go back to data binding onClick, use this

@@ -27,7 +27,6 @@ public class MainActivityViewModel {
         return RestActions.createChat(chatName, firstChatMessage);
     }
 
-
     public void launchProfileActivity(Context context) {
         Intent intent = new Intent(context, ProfileActivity.class);
         context.startActivity(intent);
