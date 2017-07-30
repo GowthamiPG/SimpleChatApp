@@ -55,9 +55,9 @@ public class InitSessionViewModel extends BaseObservable{
 
     public View.OnClickListener onLoginClicked(EditText emailInput, EditText passwordInput) {
         return view -> {
-            if (areValidLoginInputs(emailInput, passwordInput)) {
-                String email = emailInput.getEditableText().toString();
-                String password = emailInput.getEditableText().toString();
+            String email = emailInput.getEditableText().toString();
+            String password = passwordInput.getEditableText().toString();
+            if (areValidLoginInputs(email, password)) {
                 logUserIn(email, password);
             }
         };
@@ -66,31 +66,30 @@ public class InitSessionViewModel extends BaseObservable{
     public View.OnClickListener onRegisterClicked(EditText nameInput, EditText emailInput,
                                                   EditText passwordInput, EditText confirmPwInput) {
         return view -> {
-            if (areValidRegisterInputs(nameInput, emailInput, passwordInput, confirmPwInput)) {
-                String name = nameInput.getEditableText().toString();
-                String email = emailInput.getEditableText().toString();
-                String password = passwordInput.getEditableText().toString();
-                String passwordConfirmation = confirmPwInput.getEditableText().toString();
-                registerUser(name, email, password, passwordConfirmation);
+            String name = nameInput.getEditableText().toString();
+            String email = emailInput.getEditableText().toString();
+            String password = passwordInput.getEditableText().toString();
+            String confirmPw = confirmPwInput.getEditableText().toString();
+            if (areValidRegisterInputs(name, email, password, confirmPw)) {
+                registerUser(name, email, password, confirmPw);
             } else {
                 Toast.makeText(context, "Please check input", Toast.LENGTH_SHORT).show();
             }
         };
     }
 
-    public boolean areValidRegisterInputs(EditText nameInput, EditText emailInput,
-                                          EditText passwordInput, EditText confirmPwInput) {
-        return !TextUtils.isEmpty(nameInput.getEditableText().toString())
-                && !TextUtils.isEmpty(emailInput.getEditableText().toString())
-                && !TextUtils.isEmpty(passwordInput.getEditableText().toString())
-                && !TextUtils.isEmpty(confirmPwInput.getEditableText().toString())
-                && confirmPwInput.getEditableText().toString()
-                .equals(passwordInput.getEditableText().toString());
+    public boolean areValidRegisterInputs(String name, String email,
+                                          String password, String confirmPassword) {
+        return !TextUtils.isEmpty(name)
+                && !TextUtils.isEmpty(email)
+                && !TextUtils.isEmpty(password)
+                && !TextUtils.isEmpty(confirmPassword)
+                && confirmPassword.equals(password);
     }
 
-    public boolean areValidLoginInputs(EditText loginInput, EditText passwordInput) {
-        return !TextUtils.isEmpty(loginInput.getEditableText().toString())
-                && !TextUtils.isEmpty(passwordInput.getEditableText().toString());
+    public boolean areValidLoginInputs(String loginInput, String passwordInput) {
+        return !TextUtils.isEmpty(loginInput)
+                && !TextUtils.isEmpty(passwordInput);
     }
 
     public void logUserIn(String email, String password) {
