@@ -11,6 +11,8 @@ import android.widget.Toast;
 
 import com.android.databinding.library.baseAdapters.BR;
 import com.trautmann.simplechatapp.rest.RestActions;
+import com.trautmann.simplechatapp.util.Constants;
+import com.trautmann.simplechatapp.util.PreferencesHelper;
 import com.trautmann.simplechatapp.view.MainActivity;
 
 /**
@@ -99,11 +101,16 @@ public class InitSessionViewModel extends BaseObservable{
                 })
                 .subscribe(genericResponse -> {
                     setLoggingIn(false);
+                    setUserLoggedIn();
                     launchMainActivity();
                 }, throwable -> {
                     setLoggingIn(false);
                     Toast.makeText(context, "Login failed", Toast.LENGTH_SHORT).show();
                 });
+    }
+
+    private void setUserLoggedIn() {
+        PreferencesHelper.set(Constants.Prefs.Auth.USER_LOGGED_IN,true);
     }
 
     private void launchMainActivity() {
