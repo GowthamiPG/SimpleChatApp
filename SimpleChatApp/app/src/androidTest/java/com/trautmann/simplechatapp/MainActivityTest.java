@@ -27,7 +27,7 @@ public class MainActivityTest {
             new ActivityTestRule<>(MainActivity.class);
 
     @Test
-    public void initialState_test() {
+    public void testsInitialState() {
         onView(withId(R.id.createChatFab))
                 .check(matches(withEffectiveVisibility(ViewMatchers.Visibility.VISIBLE)));
 
@@ -40,7 +40,7 @@ public class MainActivityTest {
     }
 
     @Test
-    public void testCreateChatDialog() {
+    public void testsCreateChatDialog() {
         onView(withId(R.id.createChatFab))
                 .check(matches(withEffectiveVisibility(ViewMatchers.Visibility.VISIBLE)));
 

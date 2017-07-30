@@ -41,7 +41,7 @@ public class ChatDetailActivityTest {
             };
 
     @Test
-    public void initialState_test() {
+    public void testsInitialState() {
 
         onView(withId(R.id.chatDetailInputEditText))
                 .check(matches(withEffectiveVisibility(ViewMatchers.Visibility.VISIBLE)));
@@ -58,7 +58,7 @@ public class ChatDetailActivityTest {
     }
 
     @Test
-    public void editChatName_test() {
+    public void testsEditChatName() {
         onView(withId(R.id.editChatButton))
                 .check(matches(withEffectiveVisibility(ViewMatchers.Visibility.VISIBLE)));
 

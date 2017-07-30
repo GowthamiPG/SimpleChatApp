@@ -29,7 +29,7 @@ public class MainActivityIntentTest {
 
 
     @Test
-    public void profileButtonClick_test() {
+    public void testsProfileButtonClick() {
         onView(withId(R.id.profileButton))
                 .perform(click());
 

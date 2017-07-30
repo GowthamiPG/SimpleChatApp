@@ -27,7 +27,7 @@ public class ProfileActivityTest {
             new ActivityTestRule<>(ProfileActivity.class);
 
     @Test
-    public void initialState_test() {
+    public void testsInitialState() {
 
         onView(withId(R.id.profileNameTextView))
                 .check(matches(withEffectiveVisibility(ViewMatchers.Visibility.VISIBLE)));
@@ -43,7 +43,7 @@ public class ProfileActivityTest {
     }
 
     @Test
-    public void editProfile_test() {
+    public void testsEditProfile() {
         onView(withId(R.id.editProfileButton))
                 .perform(click());
 

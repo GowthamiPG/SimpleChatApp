@@ -31,7 +31,7 @@ public class InitSessionActivityTest {
 
 
     @Test
-    public void initialState_test() {
+    public void testsInitialState() {
 
         onView(withId(R.id.emailEditText))
                 .check(matches(withEffectiveVisibility(ViewMatchers.Visibility.VISIBLE)));
@@ -60,7 +60,7 @@ public class InitSessionActivityTest {
     }
 
     @Test
-    public void switchToRegister_test() {
+    public void testsSwitchToRegister() {
         onView(withId(R.id.account_status_prompt_textview))
                 .perform(click());
 
@@ -103,7 +103,7 @@ public class InitSessionActivityTest {
     }
 
     @Test
-    public void switchToRegisterAndBackToLogin_test() {
+    public void testsSwitchToRegisterAndBackToLogin() {
         // Switch to register
         onView(withId(R.id.account_status_prompt_textview))
                 .perform(click());
