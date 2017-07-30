@@ -30,7 +30,7 @@ public class ChatListItemViewModelTests {
     Context mockContext;
 
     @Before
-    public void initChatDetailViewModel() {
+    public void initChatListItemViewModel() {
         ChatMessage lastMessage = new ChatMessage(1, 1, 1, "This is the last message",
                 "2019-10-04T22:44:30.652Z", new User(1, "Brandon", "Brandon.e.trautmann@gmail.com"));
         Chat chat = new Chat(1, "The Chat", null, lastMessage);
