@@ -28,12 +28,12 @@ public class ChatDetailActivityViewModelTests {
     }
 
     @Test
-    public void getTitle_test() {
+    public void testsGetTitle() {
         assertEquals("The Chat", chatDetailActivityViewModel.getTitle());
     }
 
     @Test
-    public void getChatId_test() {
+    public void testsGetChatId() {
         assertEquals(1, chatDetailActivityViewModel.getChatId());
     }
 

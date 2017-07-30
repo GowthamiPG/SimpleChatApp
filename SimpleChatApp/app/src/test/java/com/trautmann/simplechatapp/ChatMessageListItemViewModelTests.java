@@ -25,12 +25,12 @@ public class ChatMessageListItemViewModelTests {
     }
 
     @Test
-    public void getSenderName_test() {
+    public void testsGetSenderName() {
         assertEquals("Brandon", chatMessageListItemViewModel.getSenderName());
     }
 
     @Test
-    public void getMessageBody_test() {
+    public void testsGetMessageBody() {
         assertEquals("A great chat message", chatMessageListItemViewModel.getMessageBody());
     }
 }

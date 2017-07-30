@@ -42,12 +42,12 @@ public class ChatListItemViewModelTests {
     }
 
     @Test
-    public void getChatName_test() {
+    public void testsGetChatName() {
         assertEquals("The Chat", chatListItemViewModel.getChatName());
     }
 
     @Test
-    public void getLastChatMessage_test() {
+    public void testsGetLastChatMessage() {
         assertEquals(FAKE_STRING, chatListItemViewModel.getLastChatMessage());
     }
 
