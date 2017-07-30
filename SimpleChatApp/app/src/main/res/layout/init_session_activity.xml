@@ -92,6 +92,7 @@
         </RelativeLayout>
 
         <TextView
+            android:id="@+id/account_status_prompt_textview"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
