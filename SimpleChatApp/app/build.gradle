@@ -61,6 +61,10 @@ dependencies {
     androidTestCompile ('com.android.support.test.espresso:espresso-intents:3.0.0') {
         exclude module: 'support-annotations'
     }
+    testCompile "org.powermock:powermock-module-junit4:1.6.2"
+    testCompile "org.powermock:powermock-module-junit4-rule:1.6.2"
+    testCompile "org.powermock:powermock-api-mockito:1.6.2"
+    testCompile "org.powermock:powermock-classloading-xstream:1.6.2"
 }
 
 apply plugin: 'me.tatarka.retrolambda'
