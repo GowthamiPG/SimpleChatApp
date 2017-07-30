@@ -73,5 +73,68 @@ public class InitSessionActivityViewModelTests {
         assertFalse(initSessionViewModel.areValidLoginInputs(email, password));
     }
 
+    @Test
+    public void testsValidRegisterInputs() {
+        String name = "Brandon";
+        String email = "email.address@gmail.com";
+        String password = "secret";
+        String confirmPassword = "secret";
+        assertTrue(initSessionViewModel.areValidRegisterInputs(name, email, password, confirmPassword));
+    }
+
+    @Test
+    public void testsInvalidRegisterInputsDueToEmptyName() {
+        String name = "";
+        String email = "email.address@gmail.com";
+        String password = "secret";
+        String confirmPassword = "secret";
+        assertFalse(initSessionViewModel.areValidRegisterInputs(name, email, password, confirmPassword));
+    }
+
+    @Test
+    public void testsInvalidRegisterInputsDueToEmptyEmail() {
+        String name = "Brandon";
+        String email = "";
+        String password = "secret";
+        String confirmPassword = "secret";
+        assertFalse(initSessionViewModel.areValidRegisterInputs(name, email, password, confirmPassword));
+    }
+
+    @Test
+    public void testsInvalidRegisterInputsDueToEmptyPassword() {
+        String name = "Brandon";
+        String email = "email.address@gmail.com";
+        String password = "";
+        String confirmPassword = "secret";
+        assertFalse(initSessionViewModel.areValidRegisterInputs(name, email, password, confirmPassword));
+    }
+
+    @Test
+    public void testsInvalidRegisterInputsDueToEmptyConfirmPassword() {
+        String name = "Brandon";
+        String email = "email.address@gmail.com";
+        String password = "secret";
+        String confirmPassword = "";
+        assertFalse(initSessionViewModel.areValidRegisterInputs(name, email, password, confirmPassword));
+    }
+
+    @Test
+    public void testsInvalidRegisterInputsDueToAllEmptyFields() {
+        String name = "";
+        String email = "";
+        String password = "";
+        String confirmPassword = "";
+        assertFalse(initSessionViewModel.areValidRegisterInputs(name, email, password, confirmPassword));
+    }
+
+    @Test
+    public void testsInvalidRegisterInputsDueToMismatchingPasswords() {
+        String name = "Brandon";
+        String email = "email.address@gmail.com";
+        String password = "secret";
+        String confirmPassword = "secret1";
+        assertFalse(initSessionViewModel.areValidRegisterInputs(name, email, password, confirmPassword));
+    }
+
 
 }
