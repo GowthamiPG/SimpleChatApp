@@ -102,5 +102,47 @@ public class InitSessionActivityTest {
 
     }
 
+    @Test
+    public void switchToRegisterAndBackToLogin_test() {
+        // Switch to register
+        onView(withId(R.id.account_status_prompt_textview))
+                .perform(click());
+
+        // Switch back to login
+        onView(withId(R.id.account_status_prompt_textview))
+                .perform(click());
+
+        onView(withId(R.id.nameEditText))
+                .check(matches(withEffectiveVisibility(ViewMatchers.Visibility.GONE)));
+
+        onView(withId(R.id.emailEditText))
+                .check(matches(withEffectiveVisibility(ViewMatchers.Visibility.VISIBLE)));
+
+        onView(withId(R.id.emailEditText))
+                .check(matches(withHint(R.string.email_hint_text)));
+
+        onView(withId(R.id.passwordEditText))
+                .check(matches(withEffectiveVisibility(ViewMatchers.Visibility.VISIBLE)));
+
+        onView(withId(R.id.passwordEditText))
+                .check(matches(withHint(R.string.password_hint_text)));
+
+        onView(withId(R.id.confirmPasswordEditText))
+                .check(matches(withEffectiveVisibility(ViewMatchers.Visibility.GONE)));
+
+        onView(withId(R.id.loginButton))
+                .check(matches(withEffectiveVisibility(ViewMatchers.Visibility.VISIBLE)));
+
+        onView(withId(R.id.loginButton))
+                .check(matches(withText(R.string.login_button_text)));
+
+        onView(withId(R.id.account_status_prompt_textview))
+                .check(matches(withEffectiveVisibility(ViewMatchers.Visibility.VISIBLE)));
+
+        onView(withId(R.id.account_status_prompt_textview))
+                .check(matches(withText(R.string.to_register_button_text)));
+
+    }
+
 
 }
