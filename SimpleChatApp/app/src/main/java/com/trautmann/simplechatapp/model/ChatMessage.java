@@ -26,6 +26,15 @@ public class ChatMessage {
     @SerializedName("user")
     private User sender;
 
+    public ChatMessage(int id, int chatId, int userId, String message, String messageTimestamp, User sender) {
+        this.id = id;
+        this.chatId = chatId;
+        this.userId = userId;
+        this.message = message;
+        this.messageTimestamp = messageTimestamp;
+        this.sender = sender;
+    }
+
     public int getId() {
         return id;
     }
