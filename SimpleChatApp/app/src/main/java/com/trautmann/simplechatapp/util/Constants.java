@@ -16,4 +16,11 @@ public class Constants {
         public static final String CHAT_ACTION_RENAME = "renameChat";
         public static final String CHAT_ACTION_CREATE = "createChat";
     }
+
+    public static class Prefs {
+        public static class Auth {
+            public static final String USER_LOGGED_IN = "userLoggedIn";
+            public static final String USER_AUTH_TOKEN = "userAuthToken";
+        }
+    }
 }
