@@ -83,7 +83,7 @@
                 android:layout_centerInParent="true"
                 android:background="@drawable/background_large_button"
                 android:enabled="@{viewModel.networking ? false : true}"
-                android:onClick="@{viewModel.editingProfile ? viewModel.onUpdateUserClicked(editNameEditText, editEmailEditText) : viewModel.onLogOutClicked()}"
+                android:onClick="@{viewModel.editingProfile ? viewModel.onUpdateUserClicked(editNameEditText, editEmailEditText, context) : viewModel.onLogOutClicked(context)}"
                 android:text="@{viewModel.editingProfile ? @string/edit_profile_submit_button_text : @string/profile_log_out_button_text}"
                 android:visibility="@{viewModel.networking? View.GONE : View.VISIBLE}" />
 

@@ -26,7 +26,7 @@ public class ProfileActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
 
         binding = DataBindingUtil.setContentView(this, R.layout.profile_activity);
-        binding.setViewModel(new ProfileActivityViewModel(this));
+        binding.setViewModel(new ProfileActivityViewModel());
 
         binding.getViewModel().getProfile();
     }

@@ -23,13 +23,11 @@ import com.trautmann.simplechatapp.view.InitSessionActivity;
 
 public class ProfileActivityViewModel extends BaseObservable {
 
-    private Context context;
     private User user;
     private boolean isNetworking;
     private boolean isEditingProfile;
 
-    public ProfileActivityViewModel(Context context) {
-        this.context = context;
+    public ProfileActivityViewModel() {
         setNetworking(false);
         setEditingProfile(false);
     }
@@ -85,29 +83,30 @@ public class ProfileActivityViewModel extends BaseObservable {
                 });
     }
 
-    public View.OnClickListener onLogOutClicked() {
-        return view -> logOut();
+    public View.OnClickListener onLogOutClicked(Context context) {
+        return view -> logOut(context);
     }
 
     public View.OnClickListener onUpdateUserClicked(EditText nameEditText,
-                                                    EditText emailEditText) {
+                                                    EditText emailEditText,
+                                                    Context context) {
         return view -> {
             if (!TextUtils.isEmpty(nameEditText.getEditableText().toString())
                     || !TextUtils.isEmpty(emailEditText.getEditableText().toString())) {
                 updateUser(nameEditText.getEditableText().toString(),
-                        emailEditText.getEditableText().toString());
+                        emailEditText.getEditableText().toString(), context);
             }
         };
     }
 
-    public void updateUser(String name, String email) {
+    public void updateUser(String name, String email, Context context) {
         RestActions.updateUser(name, email)
                 .subscribe(updateUser -> setEditingProfile(false),
                         throwable -> Toast.makeText(context, "Couldn't update profile. Try again " +
                         "later!", Toast.LENGTH_SHORT).show());
     }
 
-    public void logOut() {
+    public void logOut(Context context) {
         RestActions.logout()
                 .doOnSubscribe(disposable -> {
                     setNetworking(true);
@@ -115,14 +114,14 @@ public class ProfileActivityViewModel extends BaseObservable {
                 .subscribe(genericResponse -> {
                     setNetworking(false);
                     storeUserLoggedOut();
-                    launchInitSessionActivity();
+                    launchInitSessionActivity(context);
 
                 }, throwable -> {
                     // TODO: We don't care if the call fails as the user wants to
                     // log out regardless. Use a Completable(?) instead of Single
                     setNetworking(false);
                     storeUserLoggedOut();
-                    launchInitSessionActivity();
+                    launchInitSessionActivity(context);
 
                 });
     }
@@ -131,7 +130,7 @@ public class ProfileActivityViewModel extends BaseObservable {
         PreferencesHelper.set(Constants.Prefs.Auth.USER_LOGGED_IN, false);
     }
 
-    private void launchInitSessionActivity() {
+    private void launchInitSessionActivity(Context context) {
         Intent intent = new Intent(context, InitSessionActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
         context.startActivity(intent);
