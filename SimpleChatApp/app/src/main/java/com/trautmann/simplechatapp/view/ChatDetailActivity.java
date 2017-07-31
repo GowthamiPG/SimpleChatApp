@@ -59,7 +59,7 @@ public class ChatDetailActivity extends AppCompatActivity implements ChatActionD
         LinearLayoutManager lm = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
         binding.chatMessagesListRecyclerView.addItemDecoration(new ChatMessageItemDecoration(this));
         binding.chatMessagesListRecyclerView.setLayoutManager(lm);
-        adapter = new ChatMessagesListAdapter(null, this);
+        adapter = new ChatMessagesListAdapter(null);
         binding.chatMessagesListRecyclerView.setAdapter(adapter);
 
         binding.getViewModel().getChatMessageLiveData().observe(this, chatMessages -> {

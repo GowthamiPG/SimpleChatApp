@@ -1,6 +1,5 @@
 package com.trautmann.simplechatapp.view.adapter;
 
-import android.content.Context;
 import android.databinding.DataBindingUtil;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -20,11 +19,9 @@ import java.util.List;
 public class ChatMessagesListAdapter extends RecyclerView.Adapter<ChatMessagesListAdapter.ChatMessageBindingHolder> {
 
     private List<ChatMessage> chatMessages;
-    private Context context;
 
-    public ChatMessagesListAdapter(List<ChatMessage> chatMessages, Context context) {
+    public ChatMessagesListAdapter(List<ChatMessage> chatMessages) {
         this.chatMessages = chatMessages;
-        this.context = context;
     }
 
     public List<ChatMessage> getChatMessages() {
