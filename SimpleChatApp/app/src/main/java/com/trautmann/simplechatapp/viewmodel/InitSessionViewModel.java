@@ -21,12 +21,10 @@ import com.trautmann.simplechatapp.view.MainActivity;
 
 public class InitSessionViewModel extends BaseObservable{
 
-    private Context context;
     private boolean isRegistering;
     private boolean isLoggingIn;
 
-    public InitSessionViewModel(Context context) {
-        this.context = context;
+    public InitSessionViewModel() {
         setLoggingIn(false);
         setRegistering(false);
     }
@@ -55,25 +53,27 @@ public class InitSessionViewModel extends BaseObservable{
         return view -> setRegistering(!isRegistering());
     }
 
-    public View.OnClickListener onLoginClicked(EditText emailInput, EditText passwordInput) {
+    public View.OnClickListener onLoginClicked(EditText emailInput, EditText passwordInput,
+                                               Context context) {
         return view -> {
             String email = emailInput.getEditableText().toString();
             String password = passwordInput.getEditableText().toString();
             if (areValidLoginInputs(email, password)) {
-                logUserIn(email, password);
+                logUserIn(email, password, context);
             }
         };
     }
 
     public View.OnClickListener onRegisterClicked(EditText nameInput, EditText emailInput,
-                                                  EditText passwordInput, EditText confirmPwInput) {
+                                                  EditText passwordInput, EditText confirmPwInput,
+                                                  Context context) {
         return view -> {
             String name = nameInput.getEditableText().toString();
             String email = emailInput.getEditableText().toString();
             String password = passwordInput.getEditableText().toString();
             String confirmPw = confirmPwInput.getEditableText().toString();
             if (areValidRegisterInputs(name, email, password, confirmPw)) {
-                registerUser(name, email, password, confirmPw);
+                registerUser(name, email, password, confirmPw, context);
             } else {
                 Toast.makeText(context, "Please check input", Toast.LENGTH_SHORT).show();
             }
@@ -94,7 +94,7 @@ public class InitSessionViewModel extends BaseObservable{
                 && !TextUtils.isEmpty(passwordInput);
     }
 
-    public void logUserIn(String email, String password) {
+    public void logUserIn(String email, String password, Context context) {
         RestActions.login(email, password)
                 .doOnSubscribe(disposable -> {
                     setLoggingIn(true);
@@ -102,7 +102,7 @@ public class InitSessionViewModel extends BaseObservable{
                 .subscribe(genericResponse -> {
                     setLoggingIn(false);
                     setUserLoggedIn();
-                    launchMainActivity();
+                    launchMainActivity(context);
                 }, throwable -> {
                     setLoggingIn(false);
                     Toast.makeText(context, "Login failed", Toast.LENGTH_SHORT).show();
@@ -113,19 +113,19 @@ public class InitSessionViewModel extends BaseObservable{
         PreferencesHelper.set(Constants.Prefs.Auth.USER_LOGGED_IN,true);
     }
 
-    private void launchMainActivity() {
+    private void launchMainActivity(Context context) {
         Intent intent = new Intent(context, MainActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
         context.startActivity(intent);
     }
 
     public void registerUser(String name, String email, String password,
-                             String passwordConfirmation) {
+                             String passwordConfirmation, Context context) {
         RestActions.createUser(name, email, password, passwordConfirmation)
                 .doOnSubscribe(disposable -> {
                     setLoggingIn(true);
                 })
-                .subscribe(createUser -> launchMainActivity(), throwable -> Toast.makeText(context, "Couldn't sign you up." +
+                .subscribe(createUser -> launchMainActivity(context), throwable -> Toast.makeText(context, "Couldn't sign you up." +
                         " Try again later!", Toast.LENGTH_SHORT).show());
 
     }

@@ -31,7 +31,7 @@ public class InitSessionActivity extends AppCompatActivity {
         } else {
             binding =
                     DataBindingUtil.setContentView(this, R.layout.init_session_activity);
-            binding.setViewModel(new InitSessionViewModel(this));
+            binding.setViewModel(new InitSessionViewModel());
         }
     }
 
