@@ -15,27 +15,32 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-        <RelativeLayout
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:orientation="vertical">
 
-            <android.support.v7.widget.RecyclerView
-                android:id="@+id/chatListRecyclerView"
+            <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent" />
+                android:layout_height="match_parent">
 
-            <android.support.design.widget.FloatingActionButton
-                android:onClick="onCreateChatFabClicked"
-                android:id="@+id/createChatFab"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentBottom="true"
-                android:src="@drawable/ic_chat_white_24dp"
-                android:layout_alignParentEnd="true"
-                app:useCompatPadding="true" />
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/chatListRecyclerView"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" />
 
-        </RelativeLayout>
+                <android.support.design.widget.FloatingActionButton
+                    android:id="@+id/createChatFab"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true"
+                    android:layout_alignParentEnd="true"
+                    android:onClick="onCreateChatFabClicked"
+                    android:src="@drawable/ic_chat_white_24dp"
+                    app:useCompatPadding="true" />
 
+            </RelativeLayout>
+        </LinearLayout>
 
     </android.support.design.widget.CoordinatorLayout>
 

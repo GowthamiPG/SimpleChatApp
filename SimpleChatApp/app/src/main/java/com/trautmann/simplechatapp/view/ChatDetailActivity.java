@@ -1,12 +1,12 @@
 package com.trautmann.simplechatapp.view;
 
+import android.arch.lifecycle.LifecycleRegistry;
+import android.arch.lifecycle.LifecycleRegistryOwner;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
-import android.text.TextUtils;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -25,27 +25,36 @@ import com.trautmann.simplechatapp.viewmodel.ChatDetailActivityViewModel;
  * Created by Brandon Trautmann
  */
 
-public class ChatDetailActivity extends AppCompatActivity implements ChatActionDialog.IChatAction {
+public class ChatDetailActivity extends AppCompatActivity implements ChatActionDialog.IChatAction, LifecycleRegistryOwner {
 
     private ChatDetailActivityBinding binding;
     private ChatMessagesListAdapter adapter;
+    private LifecycleRegistry lifecycleRegistry;
 
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        binding =
-                DataBindingUtil.setContentView(this, R.layout.chat_detail_activity);
+        lifecycleRegistry = new LifecycleRegistry(this);
+
         int chatId = getIntent().getExtras().getInt(Constants.IntentArguments.CHAT_ID);
         String chatName = getIntent().getExtras().getString(Constants.IntentArguments.CHAT_NAME);
-        binding.setViewModel(new ChatDetailActivityViewModel(
-                new Chat(chatId, chatName, null, null)));
 
-        setSupportActionBar(binding.chatDetailToolbar);
+        binding = DataBindingUtil.setContentView(this, R.layout.chat_detail_activity);
+
+        ChatDetailActivityViewModel viewModel = new ChatDetailActivityViewModel(new Chat(chatId, chatName, null, null));
+        binding.setViewModel(viewModel);
+
         if (getSupportActionBar() != null) {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         }
+
+        binding.getViewModel().getTitleLiveData().observe(this, title -> {
+            if (getSupportActionBar() != null) {
+                getSupportActionBar().setTitle(title);
+            }
+        });
 
         LinearLayoutManager lm = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
         binding.chatMessagesListRecyclerView.addItemDecoration(new ChatMessageItemDecoration(this));
@@ -53,10 +62,26 @@ public class ChatDetailActivity extends AppCompatActivity implements ChatActionD
         adapter = new ChatMessagesListAdapter(null, this);
         binding.chatMessagesListRecyclerView.setAdapter(adapter);
 
-        handleSendButtonClicks();
+        binding.getViewModel().getChatMessageLiveData().observe(this, chatMessages -> {
+            adapter.setChatMessages(chatMessages);
+            adapter.notifyDataSetChanged();
+        });
 
-        getChatMessages(chatId);
+        handleSendClicks();
 
+    }
+
+    private void handleSendClicks() {
+        binding.chatDetailSendImageButton.setOnClickListener(view -> {
+            if (binding.getViewModel().canSendMessage(binding.chatDetailInputEditText
+                    .getEditableText().toString())) {
+                binding.getViewModel().createChatMessage(binding.chatDetailInputEditText
+                        .getEditableText().toString())
+                        .subscribe(createChatMessage -> binding.chatDetailInputEditText.setText(""),
+                                throwable -> Toast.makeText(this, "Couldn't send message!",
+                                        Toast.LENGTH_SHORT).show());
+            }
+        });
     }
 
     @Override
@@ -81,37 +106,6 @@ public class ChatDetailActivity extends AppCompatActivity implements ChatActionD
         return false;
     }
 
-    //TODO: Use Data binding to handle onClick
-    // Can't figure out how to update RecyclerView using binding
-    private void handleSendButtonClicks() {
-        binding.chatDetailSendImageButton.setOnClickListener(view -> {
-            if (!TextUtils.isEmpty(binding.chatDetailInputEditText.getEditableText())) {
-                binding.getViewModel().createChatMessage(
-                        binding.chatDetailInputEditText.getEditableText().toString())
-                        .subscribe(createChatMessage -> {
-                            adapter.getChatMessages().add(createChatMessage.getMessageSent());
-                            adapter.notifyDataSetChanged();
-                        }, throwable -> {
-                            Toast.makeText(this, "Error sending message", Toast.LENGTH_SHORT).show();
-                        });
-
-            }
-        });
-    }
-
-    private void getChatMessages(int chatId) {
-        binding.getViewModel().getChatMessagesList(chatId)
-                .doOnSubscribe(disposable -> Log.d("ChatDetailActivity", "Getting chat messages..."))
-                .subscribe(getChatMessagesList -> {
-                    if (getChatMessagesList.getChatMessages() != null) {
-                        adapter.setChatMessages(getChatMessagesList.getChatMessages());
-                        adapter.notifyDataSetChanged();
-                    }
-                }, throwable -> Toast.makeText(ChatDetailActivity.this, "Error getting" +
-                        " messages!", Toast.LENGTH_SHORT).show());
-    }
-
-
     @Override
     public void onCreateClicked(String name, String message) {
         // Not implemented
@@ -120,12 +114,14 @@ public class ChatDetailActivity extends AppCompatActivity implements ChatActionD
     @Override
     public void onRenameClicked(String name) {
         binding.getViewModel().updateChat(name)
-                .doOnSubscribe(disposable -> {
-                    //TODO Progress
-                })
-                .subscribe(updateChat -> {
+                .subscribe(updateChat -> {},
+                        throwable -> Toast.makeText(this,
+                                "Unable to rename chat", Toast.LENGTH_SHORT).show());
 
-                }, throwable -> Toast.makeText(this,
-                        "Unable to rename chat", Toast.LENGTH_SHORT).show());
+    }
+
+    @Override
+    public LifecycleRegistry getLifecycle() {
+        return lifecycleRegistry;
     }
 }

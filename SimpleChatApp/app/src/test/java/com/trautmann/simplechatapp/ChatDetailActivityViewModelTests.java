@@ -29,7 +29,7 @@ public class ChatDetailActivityViewModelTests {
 
     @Test
     public void testsGetTitle() {
-        assertEquals("The Chat", chatDetailActivityViewModel.getTitle());
+        assertEquals("The Chat", chatDetailActivityViewModel.getTitleLiveData().getValue());
     }
 
     @Test

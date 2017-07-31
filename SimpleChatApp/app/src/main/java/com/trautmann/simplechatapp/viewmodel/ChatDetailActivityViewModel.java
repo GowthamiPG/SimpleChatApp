@@ -1,17 +1,16 @@
 package com.trautmann.simplechatapp.viewmodel;
 
-import android.databinding.BaseObservable;
-import android.databinding.Bindable;
+import android.arch.lifecycle.MutableLiveData;
+import android.arch.lifecycle.ViewModel;
 import android.text.TextUtils;
-import android.view.View;
-import android.widget.EditText;
 
-import com.android.databinding.library.baseAdapters.BR;
 import com.trautmann.simplechatapp.model.Chat;
+import com.trautmann.simplechatapp.model.ChatMessage;
 import com.trautmann.simplechatapp.rest.RestActions;
 import com.trautmann.simplechatapp.rest.response.CreateChatMessage;
-import com.trautmann.simplechatapp.rest.response.GetChatMessagesList;
 import com.trautmann.simplechatapp.rest.response.UpdateChat;
+
+import java.util.List;
 
 import io.reactivex.Single;
 
@@ -19,9 +18,11 @@ import io.reactivex.Single;
  * Created by Brandon Trautmann
  */
 
-public class ChatDetailActivityViewModel extends BaseObservable{
+public class ChatDetailActivityViewModel extends ViewModel {
 
     private Chat chat;
+    private MutableLiveData<List<ChatMessage>> chatMessageLiveData;
+    private MutableLiveData<String> titleLiveData;
 
     public ChatDetailActivityViewModel(Chat chat) {
         this.chat = chat;
@@ -35,39 +36,64 @@ public class ChatDetailActivityViewModel extends BaseObservable{
         this.chat = chat;
     }
 
-    @Bindable
-    public String getTitle() {
-        return chat.getName();
+    private void setChatName(String chatName) {
+        this.chat.setName(chatName);
+        this.titleLiveData.setValue(chatName);
+    }
+
+    public MutableLiveData<String> getTitleLiveData() {
+        if (titleLiveData == null) {
+            titleLiveData = new MutableLiveData<>();
+            titleLiveData.setValue(chat.getName());
+        }
+        return titleLiveData;
     }
 
     public int getChatId() {
         return chat.getId();
     }
 
-    public Single<GetChatMessagesList> getChatMessagesList(int chatId) {
-        return RestActions.getChatMessagesList(chatId);
+    public MutableLiveData<List<ChatMessage>> getChatMessageLiveData() {
+        if (chatMessageLiveData == null) {
+            chatMessageLiveData = new MutableLiveData<>();
+            getChatMessagesList(getChatId());
+        }
+        return chatMessageLiveData;
+    }
+
+    public void getChatMessagesList(int chatId) {
+        RestActions.getChatMessagesList(chatId)
+                .subscribe(getChatMessagesList -> {
+                    if (getChatMessagesList.getChatMessages() != null) {
+                        chatMessageLiveData.setValue(getChatMessagesList.getChatMessages());
+                    }
+                }, throwable -> {
+
+                });
     }
 
     public Single<CreateChatMessage> createChatMessage(String message) {
-        return RestActions.createChatMessage(getChatId(), message);
+        return RestActions.createChatMessage(getChatId(), message)
+                .doOnSuccess(createChatMessage -> {
+                    if (createChatMessage.getMessageSent() != null) {
+                        List<ChatMessage> currentChatMessages = chatMessageLiveData.getValue();
+                        if (currentChatMessages != null) {
+                            currentChatMessages.add(createChatMessage.getMessageSent());
+                            chatMessageLiveData.setValue(currentChatMessages);
+                        }
+                    }
+                });
     }
-
 
     public Single<UpdateChat> updateChat(String newChatName) {
         return RestActions.updateChat(chat.getId(), newChatName)
                 .doOnSuccess(updateChat -> {
-                    chat.setName(newChatName);
-                    notifyPropertyChanged(BR._all);
+                    setChatName(newChatName);
                 });
     }
 
-    // When we go back to data binding onClick, use this
-    public View.OnClickListener sendMessage(int chatId, EditText textInput) {
-        return view -> {
-            if (!TextUtils.isEmpty(textInput.getEditableText().toString())) {
-                createChatMessage(textInput.getEditableText().toString());
-            }
-        };
+    public boolean canSendMessage(String input) {
+        return !TextUtils.isEmpty(input);
     }
 
 }

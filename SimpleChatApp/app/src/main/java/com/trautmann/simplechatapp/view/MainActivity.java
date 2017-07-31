@@ -1,5 +1,8 @@
 package com.trautmann.simplechatapp.view;
 
+import android.arch.lifecycle.LifecycleRegistry;
+import android.arch.lifecycle.LifecycleRegistryOwner;
+import android.arch.lifecycle.ViewModelProviders;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -23,25 +26,32 @@ import com.trautmann.simplechatapp.viewmodel.MainActivityViewModel;
  * Activity for the user to view their messages list
  */
 
-public class MainActivity extends AppCompatActivity implements ChatActionDialog.IChatAction {
+public class MainActivity extends AppCompatActivity implements ChatActionDialog.IChatAction, LifecycleRegistryOwner {
 
     private MainActivityBinding binding;
     private ChatsListAdapter adapter;
+    private LifecycleRegistry lifecycleRegistry;
 
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        lifecycleRegistry = new LifecycleRegistry(this);
+
         binding = DataBindingUtil.setContentView(this, R.layout.main_activity);
-        binding.setViewModel(new MainActivityViewModel());
+        MainActivityViewModel viewModel = ViewModelProviders.of(this)
+                .get(MainActivityViewModel.class);
+        binding.setViewModel(viewModel);
 
         LinearLayoutManager lm = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
         binding.chatListRecyclerView.setLayoutManager(lm);
         adapter = new ChatsListAdapter(null, this);
         binding.chatListRecyclerView.setAdapter(adapter);
-
-        getChats();
+        viewModel.getChatLiveData().observe(this, chats -> {
+            adapter.setChats(chats);
+            adapter.notifyDataSetChanged();
+        });
 
     }
 
@@ -62,17 +72,6 @@ public class MainActivity extends AppCompatActivity implements ChatActionDialog.
         return false;
     }
 
-    private void getChats() {
-        binding.getViewModel().getChatList()
-                .subscribe(getChatsList -> {
-                    if (getChatsList.getChats() != null) {
-                        adapter.setChats(getChatsList.getChats());
-                        adapter.notifyDataSetChanged();
-                    }
-                }, throwable -> Toast.makeText(MainActivity.this,
-                        "Error loading chats", Toast.LENGTH_SHORT).show());
-    }
-
     public void onCreateChatFabClicked(View view) {
         ChatActionDialog chatActionDialog = new ChatActionDialog();
         Bundle args = new Bundle();
@@ -85,7 +84,7 @@ public class MainActivity extends AppCompatActivity implements ChatActionDialog.
     @Override
     public void onCreateClicked(String name, String message) {
         binding.getViewModel().createChat(name, message)
-                .subscribe(createChat -> getChats(), throwable -> {
+                .subscribe(createChat -> {}, throwable -> {
                     //TODO: Recreate dialog if call fails
                     Toast.makeText(MainActivity.this, "Couldn't send message",
                             Toast.LENGTH_SHORT).show();
@@ -95,5 +94,10 @@ public class MainActivity extends AppCompatActivity implements ChatActionDialog.
     @Override
     public void onRenameClicked(String name) {
         // Not implemented
+    }
+
+    @Override
+    public LifecycleRegistry getLifecycle() {
+        return lifecycleRegistry;
     }
 }
