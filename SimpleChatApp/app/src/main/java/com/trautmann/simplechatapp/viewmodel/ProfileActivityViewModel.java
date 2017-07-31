@@ -13,6 +13,8 @@ import android.widget.Toast;
 import com.android.databinding.library.baseAdapters.BR;
 import com.trautmann.simplechatapp.model.User;
 import com.trautmann.simplechatapp.rest.RestActions;
+import com.trautmann.simplechatapp.util.Constants;
+import com.trautmann.simplechatapp.util.PreferencesHelper;
 import com.trautmann.simplechatapp.view.InitSessionActivity;
 
 /**
@@ -112,15 +114,21 @@ public class ProfileActivityViewModel extends BaseObservable {
                 })
                 .subscribe(genericResponse -> {
                     setNetworking(false);
+                    storeUserLoggedOut();
                     launchInitSessionActivity();
 
                 }, throwable -> {
                     // TODO: We don't care if the call fails as the user wants to
                     // log out regardless. Use a Completable(?) instead of Single
                     setNetworking(false);
+                    storeUserLoggedOut();
                     launchInitSessionActivity();
 
                 });
+    }
+
+    private void storeUserLoggedOut() {
+        PreferencesHelper.set(Constants.Prefs.Auth.USER_LOGGED_IN, false);
     }
 
     private void launchInitSessionActivity() {
