@@ -49,9 +49,6 @@ public class ChatDetailActivityTest {
         onView(withId(R.id.chatDetailSendImageButton))
                 .check(matches(withEffectiveVisibility(ViewMatchers.Visibility.VISIBLE)));
 
-        onView(withId(R.id.chatDetailAppBarLayout))
-                .check(matches(withEffectiveVisibility(ViewMatchers.Visibility.VISIBLE)));
-
         onView(withId(R.id.editChatButton))
                 .check(matches(withEffectiveVisibility(ViewMatchers.Visibility.VISIBLE)));
 
