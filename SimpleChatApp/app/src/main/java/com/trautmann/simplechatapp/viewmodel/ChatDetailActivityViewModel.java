@@ -25,8 +25,7 @@ public class ChatDetailActivityViewModel extends ViewModel {
     private MutableLiveData<List<ChatMessage>> chatMessageLiveData;
     private MutableLiveData<String> titleLiveData;
 
-    public ChatDetailActivityViewModel(Chat chat) {
-        this.chat = chat;
+    public ChatDetailActivityViewModel() {
     }
 
     public Chat getChat() {

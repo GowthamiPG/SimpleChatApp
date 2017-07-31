@@ -45,7 +45,8 @@ public class ChatDetailActivityViewModelTests {
         ChatMessage lastMessage = new ChatMessage(1, 1, 1, "This is the last message",
                 "2019-10-04T22:44:30.652Z", new User(1, "Brandon", "Brandon.e.trautmann@gmail.com"));
         Chat chat = new Chat(1, "The Chat", null, lastMessage);
-        chatDetailActivityViewModel = new ChatDetailActivityViewModel(chat);
+        chatDetailActivityViewModel = new ChatDetailActivityViewModel();
+        chatDetailActivityViewModel.setChat(chat);
     }
 
     @Test

@@ -2,6 +2,7 @@ package com.trautmann.simplechatapp.view;
 
 import android.arch.lifecycle.LifecycleRegistry;
 import android.arch.lifecycle.LifecycleRegistryOwner;
+import android.arch.lifecycle.ViewModelProviders;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -42,7 +43,8 @@ public class ChatDetailActivity extends AppCompatActivity implements ChatActionD
 
         binding = DataBindingUtil.setContentView(this, R.layout.chat_detail_activity);
 
-        ChatDetailActivityViewModel viewModel = new ChatDetailActivityViewModel(new Chat(chatId, chatName, null, null));
+        final ChatDetailActivityViewModel viewModel = ViewModelProviders.of(this).get(ChatDetailActivityViewModel.class);
+        viewModel.setChat(new Chat(chatId, chatName, null, null));
         binding.setViewModel(viewModel);
 
         if (getSupportActionBar() != null) {
