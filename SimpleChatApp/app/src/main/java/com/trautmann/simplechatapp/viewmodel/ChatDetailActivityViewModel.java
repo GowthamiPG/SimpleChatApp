@@ -2,13 +2,14 @@ package com.trautmann.simplechatapp.viewmodel;
 
 import android.arch.lifecycle.MutableLiveData;
 import android.arch.lifecycle.ViewModel;
+import android.content.Context;
 import android.text.TextUtils;
+import android.widget.Toast;
 
 import com.trautmann.simplechatapp.model.Chat;
 import com.trautmann.simplechatapp.model.ChatMessage;
 import com.trautmann.simplechatapp.rest.RestActions;
 import com.trautmann.simplechatapp.rest.response.CreateChatMessage;
-import com.trautmann.simplechatapp.rest.response.UpdateChat;
 
 import java.util.List;
 
@@ -72,7 +73,7 @@ public class ChatDetailActivityViewModel extends ViewModel {
                 });
     }
 
-    public Single<CreateChatMessage> createChatMessage(String message) {
+    public Single<CreateChatMessage> createChatMessage(String message, Context context) {
         return RestActions.createChatMessage(getChatId(), message)
                 .doOnSuccess(createChatMessage -> {
                     if (createChatMessage.getMessageSent() != null) {
@@ -82,17 +83,27 @@ public class ChatDetailActivityViewModel extends ViewModel {
                             chatMessageLiveData.setValue(currentChatMessages);
                         }
                     }
-                });
+                })
+                .doOnError(throwable -> Toast.makeText(context, "Couldn't send message!",
+                        Toast.LENGTH_SHORT).show());
     }
 
-    public Single<UpdateChat> updateChat(String newChatName) {
-        return RestActions.updateChat(chat.getId(), newChatName)
-                .doOnSuccess(updateChat -> {
-                    setChatName(newChatName);
-                });
+    public void updateChat(String newChatName, Context context) {
+        if (canRenameChat(newChatName)) {
+            RestActions.updateChat(chat.getId(), newChatName)
+                    .doOnSuccess(updateChat -> setChatName(newChatName))
+                    .subscribe(updateChat -> {
+                            },
+                            throwable -> Toast.makeText(context,
+                                    "Unable to rename chat", Toast.LENGTH_SHORT).show());
+        }
     }
 
     public boolean canSendMessage(String input) {
+        return !TextUtils.isEmpty(input);
+    }
+
+    public boolean canRenameChat(String input) {
         return !TextUtils.isEmpty(input);
     }
 

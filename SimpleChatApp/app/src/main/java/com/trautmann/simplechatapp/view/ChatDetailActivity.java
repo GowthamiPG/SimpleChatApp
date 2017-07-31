@@ -10,7 +10,6 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.widget.Toast;
 
 import com.trautmann.simplechatapp.R;
 import com.trautmann.simplechatapp.databinding.ChatDetailActivityBinding;
@@ -76,10 +75,10 @@ public class ChatDetailActivity extends AppCompatActivity implements ChatActionD
             if (binding.getViewModel().canSendMessage(binding.chatDetailInputEditText
                     .getEditableText().toString())) {
                 binding.getViewModel().createChatMessage(binding.chatDetailInputEditText
-                        .getEditableText().toString())
+                        .getEditableText().toString(), this)
                         .subscribe(createChatMessage -> binding.chatDetailInputEditText.setText(""),
-                                throwable -> Toast.makeText(this, "Couldn't send message!",
-                                        Toast.LENGTH_SHORT).show());
+                                throwable -> {
+                                });
             }
         });
     }
@@ -113,11 +112,7 @@ public class ChatDetailActivity extends AppCompatActivity implements ChatActionD
 
     @Override
     public void onRenameClicked(String name) {
-        binding.getViewModel().updateChat(name)
-                .subscribe(updateChat -> {},
-                        throwable -> Toast.makeText(this,
-                                "Unable to rename chat", Toast.LENGTH_SHORT).show());
-
+        binding.getViewModel().updateChat(name, this);
     }
 
     @Override
